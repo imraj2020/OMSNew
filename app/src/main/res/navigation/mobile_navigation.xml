@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.cse.oms.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+
+    <fragment
+        android:id="@+id/nav_ordercollection"
+        android:name="com.cse.oms.ui.OrderCollection.OrderCollectionFragment"
+        android:label="@string/menu_OrderCollection"
+        tools:layout="@layout/order_collection_fragment" />
+
+    <fragment
+        android:id="@+id/nav_noorder"
+        android:name="com.cse.oms.ui.NoOrder.NoOrderFragment"
+        android:label="@string/menu_noorder"
+        tools:layout="@layout/no_order_fragment" />
+
+    <fragment
+        android:id="@+id/nav_customerlist"
+        android:name="com.cse.oms.ui.CustomerList.CustomerListFragment"
+        android:label="@string/menu_customerlist"
+        tools:layout="@layout/customer_list_fragment" />
+
+
+    <fragment
+        android:id="@+id/nav_productlist"
+        android:name="com.cse.oms.ui.ProductList.ProductListFragment"
+        android:label="@string/menu_productlist"
+        tools:layout="@layout/product_list_fragment" />
+
+
+
+    <fragment
+        android:id="@+id/nav_orderstatus"
+        android:name="com.cse.oms.ui.OrderStatus.OrderStatusFragment"
+        android:label="@string/menu_orderstatus"
+        tools:layout="@layout/order_status_fragment" />
+
+
+    <fragment
+        android:id="@+id/nav_sentitem"
+        android:name="com.cse.oms.ui.SentItem.SentItemFragment"
+        android:label="@string/menu_sentitem"
+        tools:layout="@layout/sent_item_fragment" />
+
+    <fragment
+        android:id="@+id/nav_drafts"
+        android:name="com.cse.oms.ui.Drafts.DraftsFragment"
+        android:label="@string/menu_drafts"
+        tools:layout="@layout/drafts_fragment" />
+
+
+
+    <fragment
+        android:id="@+id/nav_datasync"
+        android:name="com.cse.oms.ui.DataSync.DataSyncFragment"
+        android:label="@string/menu_datasync"
+        tools:layout="@layout/data_sync_fragment" />
+
+
+</navigation>
