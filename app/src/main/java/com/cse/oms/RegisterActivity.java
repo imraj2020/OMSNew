@@ -118,20 +118,14 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(Call<Register> call, Response<Register> response) {
 
                 if (response.isSuccessful()) {
-                    //Toast.makeText(requireContext(),"Login Successful", Toast.LENGTH_LONG).show();
+                    
                     Register registerresponse = response.body();
                     mProgressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Status is :" + registerresponse.getMessage(), Toast.LENGTH_LONG).show();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                        }
-                    }, 700);
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Sorry something went wrong", Toast.LENGTH_LONG).show();
-
+                    mProgressDialog.dismiss();
                 }
 
             }

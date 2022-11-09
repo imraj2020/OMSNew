@@ -12,4 +12,12 @@ public interface UserService {
 
     @POST("api/HomeApi/Registration")
     Call<Register> REGISTER_CALL(@Body Register register);
+
+
+
+    @POST("api/HomeApi/Login")
+    Call<LoginResponse> userLogin(
+            @Query("networkId")  String networkId,
+            @Query("password") String password
+    );
 }
