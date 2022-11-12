@@ -26,5 +26,10 @@ public interface UserService {
     Call<List<ProductResponse>> getProduct();
 
 
+    @GET("api/CustomerApi/GetAllCustomer")
+    Call<List<CustomerResponse>> getAllCustomer(
+            @Query("territoryId")  int territoryId,
+            @Query("scId") int scId
+    );
 
 }

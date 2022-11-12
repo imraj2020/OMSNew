@@ -141,6 +141,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     i.putExtra("EmpId",EmpId);
+                    i.putExtra("TerritoryId",TerritoryId);
                     startActivity(i);
 
 
