@@ -17,10 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OMS">
         <activity
-            android:name=".RegisterActivity"
+            android:name=".View.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".View.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.OMS.NoActionBar">
@@ -32,7 +32,7 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".View.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

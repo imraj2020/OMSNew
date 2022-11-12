@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/drawable/button_background_blue.xml" value="0.26205128205128203" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/drawable/ic_add_img.xml" value="0.26205128205128203" />
+        <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/drawable/spinner_border_top.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/layout/activity_main.xml" value="0.13768115942028986" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/layout/activity_register.xml" value="0.264" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/layout/no_order_fragment.xml" value="0.22010869565217392" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/layout/order_collection_fragment.xml" value="0.22010869565217392" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/layout/order_status_fragment.xml" value="0.22010869565217392" />
+        <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/layout/product_list_customlv.xml" value="0.176" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/layout/product_list_fragment.xml" value="0.2028985507246377" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/layout/quit_fragment.xml" value="0.2028985507246377" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/layout/sent_item_fragment.xml" value="0.2028985507246377" />

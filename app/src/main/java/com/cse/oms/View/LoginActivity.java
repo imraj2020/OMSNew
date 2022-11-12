@@ -1,19 +1,13 @@
-package com.cse.oms;
+package com.cse.oms.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,10 +16,7 @@ import com.cse.oms.LoginResRoomDb.LoginResInfo;
 import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
 import com.cse.oms.Network.ApiClient;
 import com.cse.oms.Network.LoginResponse;
-import com.cse.oms.Network.Register;
 import com.cse.oms.R;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -134,15 +125,22 @@ public class LoginActivity extends AppCompatActivity {
 
                     LoginResRoomDB db = LoginResRoomDB.getDbInstance(getApplicationContext());
 
-                    LoginResInfo loginResInfo = new LoginResInfo(EmpId,FullName,EmpNetworkId,EmpCode,Email,MobileNo,DepartmentName,
-                            DesignationName,BUId,BUName,SalesLineId,SalesLineName,RegionId,RegionName,TeamId,TeamName,
-                            TerritoryId,TerritoryName);
-                    db.loginResDAO().insertLoginResponse(loginResInfo);
-                    mProgressDialog.dismiss();
+                    try {
+                        LoginResInfo loginResInfo = new LoginResInfo(EmpId,FullName,EmpNetworkId,EmpCode,Email,MobileNo,DepartmentName,
+                                DesignationName,BUId,BUName,SalesLineId,SalesLineName,RegionId,RegionName,TeamId,TeamName,
+                                TerritoryId,TerritoryName);
+                        db.loginResDAO().insertLoginResponse(loginResInfo);
+                        mProgressDialog.dismiss();
+                    } catch (Exception e){
+                      //  Toast.makeText(getApplicationContext(),""+e,Toast.LENGTH_LONG).show();
+                        mProgressDialog.dismiss();
+                    }
+
 
 
 
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                    i.putExtra("EmpId",EmpId);
                     startActivity(i);
 
 
