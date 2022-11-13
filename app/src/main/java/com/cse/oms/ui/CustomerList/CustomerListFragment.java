@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +20,15 @@ import android.widget.Toast;
 import com.cse.oms.CustomerListRoomDb.CustomerListInfo;
 import com.cse.oms.CustomerListRoomDb.CustomerListRoomDB;
 import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
+import com.cse.oms.MyAdapters.CustomerListAdapter;
+import com.cse.oms.MyAdapters.ProductListAdapter;
 import com.cse.oms.Network.ApiClient;
 import com.cse.oms.Network.CustomerResponse;
+import com.cse.oms.ProductListRoomDb.ProductListRoomDB;
 import com.cse.oms.R;
 import com.cse.oms.databinding.CustomerListFragmentBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,7 +39,9 @@ public class CustomerListFragment extends Fragment {
 
     private CustomerListViewModel mViewModel;
     CustomerListFragmentBinding binding;
-    TextView CustomerList;
+    RecyclerView CustomerList;
+    List<CustomerListInfo> arrayList;
+
 
     public static CustomerListFragment newInstance() {
         return new CustomerListFragment();
@@ -43,16 +51,27 @@ public class CustomerListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = CustomerListFragmentBinding.inflate(inflater);
-        CustomerList = binding.customerlist;
+       CustomerList = binding.myRecycleview;
+       arrayList = new ArrayList<>();
 
 
 
         Customerlist();
+        loaddatainlistview();
 
 
 
 
         return binding.getRoot();
+    }
+
+    public void loaddatainlistview() {
+        CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
+        arrayList = db.customerListDAO().getAllCustomer();
+        CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext());
+        CustomerList.setLayoutManager(new LinearLayoutManager(requireContext()));
+        CustomerList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 
@@ -75,25 +94,19 @@ public class CustomerListFragment extends Fragment {
 
 
                     for (CustomerResponse post : nlist) {
-                        String content = "";
-                        content += "Holiday ID: " + post.getTerritoryId() + "\n";
-                        content += "Company ID: " + post.getTerritoryName()+ "\n";
-                        content += "Holiday name: " + post.getSCId()+ "\n";
-                        content += "Short Name: " + post.getDepotName()+ "\n";
-                        content += "ReligionSpecific : " + post.getCustomerId() + "\n";
-                        content += "Religion ID: " + post.getName()+ "\n";
-                        content += "EveryYearSameMonthDay : " + post.getAddress()+ "\n\n";
+                        try {
+                            CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
+                            CustomerListInfo customerListInfo = new CustomerListInfo(post.getTerritoryId(),
+                                    post.getTerritoryName(),post.getSCId(),post.getDepotName(),post.getCustomerId(),
+                                    post.getName(),post.getAddress());
+                            db.customerListDAO().insertCustomerList(customerListInfo);
+                        } catch (Exception e){
+                            Toast.makeText(requireContext(),"Data Already Exist",Toast.LENGTH_LONG).show();
+                        }
 
 
-                        CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
-                        CustomerListInfo customerListInfo = new CustomerListInfo(post.getTerritoryId(),
-                                post.getTerritoryName(),post.getSCId(),post.getDepotName(),post.getCustomerId(),
-                                post.getName(),post.getAddress());
-                        db.customerListDAO().insertCustomerList(customerListInfo);
-
-                        CustomerList.append(content);
                     }
-//                    loaddatainlistview();
+                    loaddatainlistview();
                 } else {
                     Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
                 }

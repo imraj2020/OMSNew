@@ -13,8 +13,8 @@ public interface CustomerListDAO {
     public void insertCustomerList(CustomerListInfo customerListInfo);
 
 
-//    @Query("SELECT * FROM CustomerListInfo")
-//    public List<CustomerListInfo> getAllCustomer();
+    @Query("SELECT * FROM CustomerListInfo")
+    public List<CustomerListInfo> getAllCustomer();
 
 //    @Query("SELECT * FROM LoginResInfo WHERE empId = :myposition")
 //    public List<CustomerListInfo> getAllDatafromRow(int myposition);
