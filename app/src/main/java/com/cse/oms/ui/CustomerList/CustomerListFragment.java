@@ -84,6 +84,9 @@ public class CustomerListFragment extends Fragment {
         CustomerList.setLayoutManager(new LinearLayoutManager(requireContext()));
         CustomerList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+
+        //imraj
     }
 
 
