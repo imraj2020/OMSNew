@@ -75,8 +75,6 @@ public class ProductListFragment extends Fragment {
     public void Productlist() {
 
         Call<List<ProductResponse>> call = ApiClient.getUserService().getProduct();
-        // Call<LoginResponse> loginResponseCall = LoginApiClient.getUserService().userLogin(userid,password);
-
 
         call.enqueue(new Callback<List<ProductResponse>>() {
             @Override

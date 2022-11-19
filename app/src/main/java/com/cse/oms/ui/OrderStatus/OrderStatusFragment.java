@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cse.oms.R;
+import com.cse.oms.databinding.OrderStatusFragmentBinding;
 
 public class OrderStatusFragment extends Fragment {
 
     private OrderStatusViewModel mViewModel;
+    OrderStatusFragmentBinding binding;
 
     public static OrderStatusFragment newInstance() {
         return new OrderStatusFragment();
@@ -25,7 +27,11 @@ public class OrderStatusFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.order_status_fragment, container, false);
+        binding = OrderStatusFragmentBinding.inflate(inflater);
+
+
+
+        return binding.getRoot();
     }
 
     @Override

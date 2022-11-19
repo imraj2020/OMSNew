@@ -61,51 +61,99 @@ public class HomeFragment extends Fragment {
         //test
         Intent intents = getActivity().getIntent();
         int mypositions = intents.getIntExtra("EmpId",0);
-
         //Room
         LoginResRoomDB database = LoginResRoomDB.getDbInstance(requireContext());
 
+        if(mypositions ==0){
 
-        List<LoginResInfo> list = database.loginResDAO().getAllDatafromRow(mypositions);
-        int empid = list.get(0).getEmpId();
-        String fullname = list.get(0).getFullName();
-        String empnetworkid = list.get(0).getEmpNetworkId();
-        String empcode = list.get(0).getEmpCode();
-        String email = list.get(0).getEmail();
-        String mobileon = list.get(0).getMobileNo();
-        String departmentname = list.get(0).getDepartmentName();
-        String designationname = list.get(0).getDesignationName();
-        int buid = list.get(0).getbUId();
-        String buname = list.get(0).getbUName();
+            List<LoginResInfo> list = database.loginResDAO().getAllData();
+            int empid = list.get(0).getEmpId();
+            String fullname = list.get(0).getFullName();
+            String empnetworkid = list.get(0).getEmpNetworkId();
+            String empcode = list.get(0).getEmpCode();
+            String email = list.get(0).getEmail();
+            String mobileon = list.get(0).getMobileNo();
+            String departmentname = list.get(0).getDepartmentName();
+            String designationname = list.get(0).getDesignationName();
+            int buid = list.get(0).getbUId();
+            String buname = list.get(0).getbUName();
 
-        int saleslineid = list.get(0).getSalesLineId();
-        String saleslinename = list.get(0).getSalesLineName();
-        int regionid = list.get(0).getRegionId();
-        String regionname = list.get(0).getRegionName();
-        int teamid = list.get(0).getTeamId();
-        String teamname = list.get(0).getTeamName();
-        int territoryid = list.get(0).getTerritoryId();
-        String territoryname = list.get(0).getTerritoryName();
+            int saleslineid = list.get(0).getSalesLineId();
+            String saleslinename = list.get(0).getSalesLineName();
+            int regionid = list.get(0).getRegionId();
+            String regionname = list.get(0).getRegionName();
+            int teamid = list.get(0).getTeamId();
+            String teamname = list.get(0).getTeamName();
+            int territoryid = list.get(0).getTerritoryId();
+            String territoryname = list.get(0).getTerritoryName();
 
 
-        EmpId.setText("EmpId: "+Integer.toString(empid));
-        FullName.setText("FullName: "+fullname);
-        EmpNetworkId.setText("EmpNetworkId: "+empnetworkid);
-        EmpCode.setText("EmpCode: "+empcode);
-        Email.setText("Email: "+email);
-        MobileNo.setText("MobileNo: "+mobileon);
-        DepartmentName.setText("DepartmentName: "+departmentname);
-        DesignationName.setText("DesignationName: "+designationname);
-        BUId.setText("BUId: "+Integer.toString(buid));
-        BUName.setText("BUName: "+buname);
-        SalesLineId.setText("SalesLineId: "+Integer.toString(saleslineid));
-        SalesLineName.setText("SalesLineName: "+saleslinename);
-        RegionId.setText("RegionId: "+Integer.toString(regionid));
-        RegionName.setText("RegionName: "+regionname);
-        TeamId.setText("TeamId: "+Integer.toString(teamid));
-        TeamName.setText("TeamName: "+teamname);
-        TerritoryId.setText("TerritoryId: "+Integer.toString(territoryid));
-        TerritoryName.setText("TerritoryName: "+territoryname);
+            EmpId.setText("EmpId: "+Integer.toString(empid));
+            FullName.setText("FullName: "+fullname);
+            EmpNetworkId.setText("EmpNetworkId: "+empnetworkid);
+            EmpCode.setText("EmpCode: "+empcode);
+            Email.setText("Email: "+email);
+            MobileNo.setText("MobileNo: "+mobileon);
+            DepartmentName.setText("DepartmentName: "+departmentname);
+            DesignationName.setText("DesignationName: "+designationname);
+            BUId.setText("BUId: "+Integer.toString(buid));
+            BUName.setText("BUName: "+buname);
+            SalesLineId.setText("SalesLineId: "+Integer.toString(saleslineid));
+            SalesLineName.setText("SalesLineName: "+saleslinename);
+            RegionId.setText("RegionId: "+Integer.toString(regionid));
+            RegionName.setText("RegionName: "+regionname);
+            TeamId.setText("TeamId: "+Integer.toString(teamid));
+            TeamName.setText("TeamName: "+teamname);
+            TerritoryId.setText("TerritoryId: "+Integer.toString(territoryid));
+            TerritoryName.setText("TerritoryName: "+territoryname);
+
+        }
+
+        else {
+            List<LoginResInfo> list = database.loginResDAO().getAllDatafromRow(mypositions);
+            
+            int empid = list.get(0).getEmpId();
+            String fullname = list.get(0).getFullName();
+            String empnetworkid = list.get(0).getEmpNetworkId();
+            String empcode = list.get(0).getEmpCode();
+            String email = list.get(0).getEmail();
+            String mobileon = list.get(0).getMobileNo();
+            String departmentname = list.get(0).getDepartmentName();
+            String designationname = list.get(0).getDesignationName();
+            int buid = list.get(0).getbUId();
+            String buname = list.get(0).getbUName();
+
+            int saleslineid = list.get(0).getSalesLineId();
+            String saleslinename = list.get(0).getSalesLineName();
+            int regionid = list.get(0).getRegionId();
+            String regionname = list.get(0).getRegionName();
+            int teamid = list.get(0).getTeamId();
+            String teamname = list.get(0).getTeamName();
+            int territoryid = list.get(0).getTerritoryId();
+            String territoryname = list.get(0).getTerritoryName();
+
+
+            EmpId.setText("EmpId: "+Integer.toString(empid));
+            FullName.setText("FullName: "+fullname);
+            EmpNetworkId.setText("EmpNetworkId: "+empnetworkid);
+            EmpCode.setText("EmpCode: "+empcode);
+            Email.setText("Email: "+email);
+            MobileNo.setText("MobileNo: "+mobileon);
+            DepartmentName.setText("DepartmentName: "+departmentname);
+            DesignationName.setText("DesignationName: "+designationname);
+            BUId.setText("BUId: "+Integer.toString(buid));
+            BUName.setText("BUName: "+buname);
+            SalesLineId.setText("SalesLineId: "+Integer.toString(saleslineid));
+            SalesLineName.setText("SalesLineName: "+saleslinename);
+            RegionId.setText("RegionId: "+Integer.toString(regionid));
+            RegionName.setText("RegionName: "+regionname);
+            TeamId.setText("TeamId: "+Integer.toString(teamid));
+            TeamName.setText("TeamName: "+teamname);
+            TerritoryId.setText("TerritoryId: "+Integer.toString(territoryid));
+            TerritoryName.setText("TerritoryName: "+territoryname);
+
+        }
+
 
 
 

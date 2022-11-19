@@ -59,7 +59,7 @@
                             style="@style/modifiedEditText"
                             android:inputType="textPersonName"
                             android:maxLines="1"
-                            android:hint="Employee Code"/>
+                            android:hint="NetworkId"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout

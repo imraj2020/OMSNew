@@ -16,8 +16,8 @@ public interface LoginResDAO {
     @Query("SELECT * FROM LoginResInfo WHERE empId = :myposition")
     public List<LoginResInfo> getAllDatafromRow(int myposition);
 
-//    @Query("SELECT * FROM StudentInfo")
-//    public List<LoginResInfo> getAllStudent();
+    @Query("SELECT * FROM LoginResInfo")
+    public List<LoginResInfo> getAllData();
 //
 //    @Query("UPDATE StudentInfo SET name = :name, subject = :subject WHERE id = :id")
 //    public void updateStudentInfo(String name, String subject, int id);

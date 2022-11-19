@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.OrderCollection.OrderCollectionFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Order Collection"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchview"
+            app:queryHint="Search Here"
+            android:layout_margin="10dp">
+
+        </androidx.appcompat.widget.SearchView>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="-16dp"
+            tools:layout_editor_absoluteY="215dp">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/myRecycleviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="TouchTargetSizeCheck" />
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>
+
+
+
+
+

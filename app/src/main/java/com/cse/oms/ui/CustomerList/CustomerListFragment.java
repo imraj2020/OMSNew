@@ -1,7 +1,9 @@
 package com.cse.oms.ui.CustomerList;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -43,6 +45,7 @@ public class CustomerListFragment extends Fragment {
     List<CustomerListInfo> arrayList;
 
 
+
     public static CustomerListFragment newInstance() {
         return new CustomerListFragment();
     }
@@ -52,7 +55,15 @@ public class CustomerListFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = CustomerListFragmentBinding.inflate(inflater);
        CustomerList = binding.myRecycleview;
-       arrayList = new ArrayList<>();
+
+
+        arrayList = new ArrayList<>();
+
+
+
+
+
+
 
 
 
@@ -64,6 +75,7 @@ public class CustomerListFragment extends Fragment {
 
         return binding.getRoot();
     }
+
 
     public void loaddatainlistview() {
         CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
@@ -79,7 +91,7 @@ public class CustomerListFragment extends Fragment {
 
         Intent intent = getActivity().getIntent();
         int tid = intent.getIntExtra("TerritoryId",0);
-        int Scid = 10;
+        int Scid = intent.getIntExtra("SalesLineId",0);
         Call<List<CustomerResponse>> call = ApiClient.getUserService().getAllCustomer(tid,Scid);
         // Call<LoginResponse> loginResponseCall = LoginApiClient.getUserService().userLogin(userid,password);
 
@@ -101,7 +113,7 @@ public class CustomerListFragment extends Fragment {
                                     post.getName(),post.getAddress());
                             db.customerListDAO().insertCustomerList(customerListInfo);
                         } catch (Exception e){
-                            Toast.makeText(requireContext(),"Data Already Exist",Toast.LENGTH_LONG).show();
+//                            Toast.makeText(requireContext(),"Data Already Exist",Toast.LENGTH_LONG).show();
                         }
 
 

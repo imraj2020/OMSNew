@@ -16,8 +16,8 @@ public interface CustomerListDAO {
     @Query("SELECT * FROM CustomerListInfo")
     public List<CustomerListInfo> getAllCustomer();
 
-//    @Query("SELECT * FROM LoginResInfo WHERE empId = :myposition")
-//    public List<CustomerListInfo> getAllDatafromRow(int myposition);
+    @Query("SELECT * FROM CustomerListInfo WHERE name = :searchQery")
+    public List<CustomerListInfo> getAllDatafromRow(String searchQery);
 
 //    @Query("SELECT * FROM StudentInfo")
 //    public List<LoginResInfo> getAllStudent();

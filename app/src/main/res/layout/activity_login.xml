@@ -51,7 +51,7 @@
                 <EditText
                     android:id="@+id/etUserId"
                     style="@style/modifiedEditText"
-                    android:hint="User Id"
+                    android:hint="NetworkId"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>

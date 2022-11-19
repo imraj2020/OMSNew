@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView ClickRegister;
     EditText EtUserId, EtPassword;
     String userid, password;
+    LoginDbHelper dbs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         ClickRegister = findViewById(R.id.clickregister);
         EtUserId = findViewById(R.id.etUserId);
         EtPassword = findViewById(R.id.etPassWords);
+        dbs = new LoginDbHelper(this);
 
 
         ClickPlus.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +101,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
+                    //database cursor for store login
+                    dbs = new LoginDbHelper(getApplicationContext());
+                    Cursor cursor = dbs.alldata();
+                    if (cursor.getCount() == 0) {
+                        LoginDbHelper LoginDbHelper = new LoginDbHelper(getApplicationContext());
+                        LoginDbHelper.insertRecord(userid, password);
+                    } else {
+                        //  Toast.makeText(getApplicationContext(), "Data Already Exist", Toast.LENGTH_SHORT).show();
+                    }
                     LoginResponse loginResponse = response.body();
                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                     int EmpId, BUId,SalesLineId, RegionId, TeamId, TerritoryId;
@@ -142,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     i.putExtra("EmpId",EmpId);
                     i.putExtra("TerritoryId",TerritoryId);
+                    i.putExtra("SalesLineId",SalesLineId);
                     startActivity(i);
 
 
@@ -156,13 +169,29 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 mProgressDialog.dismiss();
-                Toast.makeText(getApplicationContext(), "Throwable " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
+                userid = EtUserId.getText().toString();
+                password = EtPassword.getText().toString();
 
+                if(userid.equals("")||password.equals("")){
+                    mProgressDialog.dismiss();
+                    Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Boolean checkuserpass = dbs.checkusernamepassword(userid, password);
+                    if (checkuserpass == true) {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(LoginActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                       // intent.putExtra("Employee", userid);
+                        startActivity(intent);
+                    } else {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(LoginActivity.this, "Invalid Username Or Password", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
-
-            //
-
         });
 
     }
