@@ -1,9 +1,11 @@
 package com.cse.oms.CustomerListRoomDb;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -18,6 +20,11 @@ public interface CustomerListDAO {
 
     @Query("SELECT * FROM CustomerListInfo WHERE name = :searchQery")
     public List<CustomerListInfo> getAllDatafromRow(String searchQery);
+
+
+    @Query("SELECT * FROM CustomerListInfo WHERE name =:searchQuery")
+    LiveData<List<CustomerListInfo>> getSearchDatabase(final String searchQuery);
+
 
 //    @Query("SELECT * FROM StudentInfo")
 //    public List<LoginResInfo> getAllStudent();

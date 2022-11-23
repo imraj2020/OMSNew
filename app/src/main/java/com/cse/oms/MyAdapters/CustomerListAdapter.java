@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,11 +15,12 @@ import com.cse.oms.CustomerListRoomDb.CustomerListInfo;
 import com.cse.oms.ProductListRoomDb.ProductListInfo;
 import com.cse.oms.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapter.ViewHolder> {
+public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapter.ViewHolder>{
 
-    private final List<CustomerListInfo> list;
+    private List<CustomerListInfo> list;
     private Context context;
 
     public CustomerListAdapter(List<CustomerListInfo> list, Context context) {
@@ -25,6 +28,7 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
         this.context = context;
         notifyDataSetChanged();
     }
+
 
     @NonNull
     @Override
@@ -49,6 +53,19 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
     public int getItemCount() {
         return list.size();
     }
+
+
+    public void setList(List<CustomerListInfo> myList) {
+        list=myList;
+        notifyDataSetChanged();
+    }
+
+//    public void setList(List<CustomerListInfo> myList) {
+//        List<CustomerListInfo> lists = new ArrayList<>();
+//
+//
+//        myList = lists;
+//    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
