@@ -121,6 +121,12 @@ public class RegisterActivity extends AppCompatActivity {
                     mProgressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Status is :" + registerresponse.getMessage(), Toast.LENGTH_LONG).show();
 
+                    if(registerresponse.isSuccess()==true){
+                        Toast.makeText(getApplicationContext(), registerresponse.getMessage()+" Please Login", Toast.LENGTH_LONG).show();
+                        Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(myIntent);
+                    }
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Sorry something went wrong", Toast.LENGTH_LONG).show();
                     mProgressDialog.dismiss();

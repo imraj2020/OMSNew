@@ -35,17 +35,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderCollectionFragment extends Fragment {
+public class OrderCollectionFragment extends Fragment implements CustomerListAdapter.UserClickListener {
 
     private OrderCollectionViewModel mViewModel;
     OrderCollectionFragmentBinding binding;
     RecyclerView CustomerList;
-    List<CustomerListInfo> arrayList;
+    List<CustomerListInfo> arrayList= new ArrayList<>();
     SearchView MySearch;
-    CustomerListAdapter noteAdapter;
 
-    private CustomerListAdapter adapter;
-    private ArrayList<CustomerListInfo> courseModelArrayList;
 
     public OrderCollectionFragment() {
     }
@@ -61,41 +58,48 @@ public class OrderCollectionFragment extends Fragment {
         binding = OrderCollectionFragmentBinding.inflate(inflater);
         CustomerList = binding.myRecycleviews;
         MySearch = binding.searchview;
+
+
+        //testing
+
+
+
         MySearch.clearFocus();
-        arrayList = new ArrayList<>();
+       // arrayList = new ArrayList<>();
 
 
-
-          Customerlist();
-          loaddatainlistview();
-
-
-
-          //search
         MySearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            final List<CustomerListInfo>filteredList = new ArrayList<>();
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if (query!=null){
-                    getItemFromDb(query);
-                }
-                return true;
+                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText!=null){
-                    getItemFromDb(newText);
-                }else {
-                    //when search view is empty then set all data to the adapter class
-                    //existing list should show here
-                    List<CustomerListInfo>myList = new ArrayList<>();
-                    noteAdapter.setList(myList);
-                }
-                return true;
+
+                //testing
+                CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
+                arrayList = db.customerListDAO().getAllCustomer();
+                CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext(),this::selectedUser);
+                CustomerList.setLayoutManager(new LinearLayoutManager(requireContext()));
+                CustomerList.setAdapter(adapter);
+
+                //end test
+                adapter.getFilter().filter(newText);
+
+                String searchstr = newText;
+                return false;
+            }
+
+            private void selectedUser(CustomerListInfo customerListInfo) {
+                String Customerid= customerListInfo.getCustomerid();
+                Toast.makeText(requireContext(),customerListInfo.getCustomerid()+" Selected",Toast.LENGTH_LONG).show();
             }
         });
 
+
+        Customerlist();
+        loaddatainlistview();
 
 
 
@@ -104,28 +108,11 @@ public class OrderCollectionFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void getItemFromDb(String query){
-        String searchText = "%"+query+"%";
-        final List<CustomerListInfo>myList = new ArrayList<>(); //now it is empty
-        CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
-        //arrayList = db.customerListDAO().getAllCustomer();
-        LiveData<List<CustomerListInfo>> listLiveData = db.customerListDAO().getSearchDatabase(searchText);
-
-        listLiveData.observe(this, new Observer<List<CustomerListInfo>>() {
-            @Override
-            public void onChanged(List<CustomerListInfo> modelClasses) {
-                myList.addAll(modelClasses);
-                noteAdapter.setList(myList);
-                CustomerList.setAdapter(noteAdapter);
-
-            }
-        });
-    }
 
     public void loaddatainlistview() {
         CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
         arrayList = db.customerListDAO().getAllCustomer();
-        CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext());
+        CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext(),this::selectedUser);
         CustomerList.setLayoutManager(new LinearLayoutManager(requireContext()));
         CustomerList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -135,10 +122,10 @@ public class OrderCollectionFragment extends Fragment {
     public void Customerlist() {
 
         Intent intent = getActivity().getIntent();
-        int tid = intent.getIntExtra("TerritoryId",0);
-        int Scid = intent.getIntExtra("SalesLineId",0);
-        Call<List<CustomerResponse>> call = ApiClient.getUserService().getAllCustomer(tid,Scid);
-        // Call<LoginResponse> loginResponseCall = LoginApiClient.getUserService().userLogin(userid,password);
+        int tid = intent.getIntExtra("TerritoryId", 0);
+        int Scid = intent.getIntExtra("SalesLineId", 0);
+        Call<List<CustomerResponse>> call = ApiClient.getUserService().getAllCustomer(tid, Scid);
+
 
 
         call.enqueue(new Callback<List<CustomerResponse>>() {
@@ -154,11 +141,11 @@ public class OrderCollectionFragment extends Fragment {
                         try {
                             CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
                             CustomerListInfo customerListInfo = new CustomerListInfo(post.getTerritoryId(),
-                                    post.getTerritoryName(),post.getSCId(),post.getDepotName(),post.getCustomerId(),
-                                    post.getName(),post.getAddress());
+                                    post.getTerritoryName(), post.getSCId(), post.getDepotName(), post.getCustomerId(),
+                                    post.getName(), post.getAddress());
                             db.customerListDAO().insertCustomerList(customerListInfo);
-                        } catch (Exception e){
-//                            Toast.makeText(requireContext(),"Data Already Exist",Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+
                         }
 
 
@@ -171,7 +158,6 @@ public class OrderCollectionFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<CustomerResponse>> call, Throwable t) {
-                // Holidayres.setText(t.getMessage());
                 Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -184,4 +170,9 @@ public class OrderCollectionFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void selectedUser(CustomerListInfo customerListInfo) {
+
+        Toast.makeText(requireContext(),customerListInfo.getCustomerid()+" Selected",Toast.LENGTH_LONG).show();
+    }
 }

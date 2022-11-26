@@ -30,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CustomerListFragment extends Fragment {
+public class CustomerListFragment extends Fragment implements CustomerListAdapter.UserClickListener{
 
     private CustomerListViewModel mViewModel;
     CustomerListFragmentBinding binding;
@@ -73,7 +73,7 @@ public class CustomerListFragment extends Fragment {
     public void loaddatainlistview() {
         CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
         arrayList = db.customerListDAO().getAllCustomer();
-        CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext());
+        CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext(),this::selectedUser);
         CustomerList.setLayoutManager(new LinearLayoutManager(requireContext()));
         CustomerList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -132,4 +132,8 @@ public class CustomerListFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void selectedUser(CustomerListInfo customerListInfo) {
+
+    }
 }
