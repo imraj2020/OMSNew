@@ -30,13 +30,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CustomerListFragment extends Fragment implements CustomerListAdapter.UserClickListener{
+public class CustomerListFragment extends Fragment implements CustomerListAdapter.UserClickListener {
 
     private CustomerListViewModel mViewModel;
     CustomerListFragmentBinding binding;
     RecyclerView CustomerList;
     List<CustomerListInfo> arrayList;
-
 
 
     public static CustomerListFragment newInstance() {
@@ -47,23 +46,14 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = CustomerListFragmentBinding.inflate(inflater);
-       CustomerList = binding.myRecycleview;
+        CustomerList = binding.myRecycleview;
 
 
         arrayList = new ArrayList<>();
 
 
-
-
-
-
-
-
-
         Customerlist();
         loaddatainlistview();
-
-
 
 
         return binding.getRoot();
@@ -73,7 +63,7 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
     public void loaddatainlistview() {
         CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
         arrayList = db.customerListDAO().getAllCustomer();
-        CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext(),this::selectedUser);
+        CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext(), this::selectedUser);
         CustomerList.setLayoutManager(new LinearLayoutManager(requireContext()));
         CustomerList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -83,9 +73,9 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
     public void Customerlist() {
 
         Intent intent = getActivity().getIntent();
-        int tid = intent.getIntExtra("TerritoryId",0);
-        int Scid = intent.getIntExtra("SalesLineId",0);
-        Call<List<CustomerResponse>> call = ApiClient.getUserService().getAllCustomer(tid,Scid);
+        int tid = intent.getIntExtra("TerritoryId", 0);
+        int Scid = intent.getIntExtra("SalesLineId", 0);
+        Call<List<CustomerResponse>> call = ApiClient.getUserService().getAllCustomer(tid, Scid);
         // Call<LoginResponse> loginResponseCall = LoginApiClient.getUserService().userLogin(userid,password);
 
 
@@ -102,10 +92,10 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
                         try {
                             CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
                             CustomerListInfo customerListInfo = new CustomerListInfo(post.getTerritoryId(),
-                                    post.getTerritoryName(),post.getSCId(),post.getDepotName(),post.getCustomerId(),
-                                    post.getName(),post.getAddress());
+                                    post.getTerritoryName(), post.getSCId(), post.getDepotName(), post.getCustomerId(),
+                                    post.getName(), post.getAddress());
                             db.customerListDAO().insertCustomerList(customerListInfo);
-                        } catch (Exception e){
+                        } catch (Exception e) {
 //                            Toast.makeText(requireContext(),"Data Already Exist",Toast.LENGTH_LONG).show();
                         }
 

@@ -14,6 +14,9 @@ public interface ProductListDAO {
 
     @Query("SELECT * FROM ProductListInfo")
     public List<ProductListInfo> getAllProduct();
+
+    @Query("DELETE FROM ProductListInfo")
+    void deleteAll();
 //    @Query("SELECT * FROM ProductListInfo WHERE empId = :myposition")
 //    public List<ProductListInfo> getAllDatafromRow(int myposition);
 
@@ -22,7 +25,6 @@ public interface ProductListDAO {
 //    @Query("UPDATE StudentInfo SET name = :name, subject = :subject WHERE id = :id")
 //    public void updateStudentInfo(String name, String subject, int id);
 //
-//    @Query("DELETE FROM StudentInfo WHERE id = :id")
-//    public void deleteStudentInfo(int id);
+
 
 }

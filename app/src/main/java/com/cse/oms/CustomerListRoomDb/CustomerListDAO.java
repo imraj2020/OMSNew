@@ -25,6 +25,10 @@ public interface CustomerListDAO {
     @Query("SELECT * FROM CustomerListInfo WHERE name =:searchQuery")
     LiveData<List<CustomerListInfo>> getSearchDatabase(final String searchQuery);
 
+    @Query("DELETE FROM CustomerListInfo")
+     void deleteAlls();
+
+
 
 //    @Query("SELECT * FROM StudentInfo")
 //    public List<LoginResInfo> getAllStudent();

@@ -1,5 +1,6 @@
 package com.cse.oms.ui.ProductList;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -17,8 +18,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cse.oms.CustomerListRoomDb.CustomerListInfo;
+import com.cse.oms.CustomerListRoomDb.CustomerListRoomDB;
 import com.cse.oms.LoginResRoomDb.LoginResInfo;
 import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
+import com.cse.oms.MyAdapters.CustomerListAdapter;
 import com.cse.oms.MyAdapters.ProductListAdapter;
 import com.cse.oms.Network.ApiClient;
 import com.cse.oms.Network.ProductResponse;
@@ -39,7 +43,8 @@ public class ProductListFragment extends Fragment {
     private ProductListViewModel mViewModel;
     ProductListFragmentBinding binding;
     RecyclerView ProductList;
-    List<ProductListInfo> arrayList;
+    List<ProductListInfo> arrayList= new ArrayList<>();
+    SearchView MySearch;
 
 
     public static ProductListFragment newInstance() {
@@ -50,9 +55,42 @@ public class ProductListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = ProductListFragmentBinding.inflate(inflater);
-       // ProductList = binding.product;
         ProductList = binding.mylistview;
-        arrayList = new ArrayList<>();
+        MySearch = binding.productsearch;
+
+
+
+        MySearch.clearFocus();
+
+        MySearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                //testing
+                ProductListRoomDB db = ProductListRoomDB.getDbInstance(requireContext());
+                arrayList = db.productListDAO().getAllProduct();
+                ProductListAdapter adapter = new ProductListAdapter(arrayList, requireContext(),this::selectedUsers);
+                ProductList.setLayoutManager(new LinearLayoutManager(requireContext()));
+                ProductList.setAdapter(adapter);
+
+                //end test
+                adapter.getFilter().filter(newText);
+
+                String searchstr = newText;
+                return false;
+            }
+
+            private void selectedUsers(ProductListInfo productListInfo) {
+                String Productname= productListInfo.getName();
+                Toast.makeText(requireContext(),productListInfo.getName()+" Selected",Toast.LENGTH_LONG).show();
+            }
+        });
+
 
 
 
@@ -66,11 +104,13 @@ public class ProductListFragment extends Fragment {
     public void loaddatainlistview() {
         ProductListRoomDB db = ProductListRoomDB.getDbInstance(requireContext());
         arrayList = db.productListDAO().getAllProduct();
-        ProductListAdapter adapter = new ProductListAdapter(arrayList, requireContext());
+        ProductListAdapter adapter = new ProductListAdapter(arrayList, requireContext(),this::selectedUsers);
         ProductList.setLayoutManager(new LinearLayoutManager(requireContext()));
         ProductList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
+
+
 
     public void Productlist() {
 
@@ -97,20 +137,19 @@ public class ProductListFragment extends Fragment {
                             db.productListDAO().insertProduct(productListInfo);
                              // Toast.makeText(requireContext(),"Data inserted successfully",Toast.LENGTH_LONG).show();
                         } catch (Exception e){
-                            //  Toast.makeText(requireContext(),"Error: "+e,Toast.LENGTH_LONG).show();
+//                              Toast.makeText(requireContext(),"Error: "+e,Toast.LENGTH_LONG).show();
                         }
 
                     }
                     loaddatainlistview();
                 } else {
-                    Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Retrive Failed,please try again", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<ProductResponse>> call, Throwable t) {
-                // Holidayres.setText(t.getMessage());
-                Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Retrive Failed "+t, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -122,6 +161,12 @@ public class ProductListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(ProductListViewModel.class);
         // TODO: Use the ViewModel
+    }
+
+
+    public void selectedUsers(ProductListInfo productListInfo) {
+
+        Toast.makeText(requireContext(),productListInfo.getName()+" Selected",Toast.LENGTH_LONG).show();
     }
 
 }

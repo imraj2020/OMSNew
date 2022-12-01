@@ -18,16 +18,15 @@ public class ProductListInfo {
     int productfamilyid;
     String productfamilyname;
     String productcategory;
-    String cogs; //Confused about its type
+    float cogs;
     float mrp;
     float vat;
-    String vatunit; // Confused about its type
-    float discounted; // Confused about its type
-    int tpunit; // Confused about its type
-    String coldchangeproduct; // Confused about its type
+    float vatunit;
+    int discounted; // Confused about its type
+    float tpunit; // Confused about its type
+    int coldchangeproduct; // Confused about its type
 
-
-    public ProductListInfo(int productid, String productcode, String name, String description, float tradeprice, int productstrength, float packsize, int productfamilyid, String productfamilyname, String productcategory, String cogs, float mrp, float vat, String vatunit, float discounted, int tpunit, String coldchangeproduct) {
+    public ProductListInfo(int productid, String productcode, String name, String description, float tradeprice, int productstrength, float packsize, int productfamilyid, String productfamilyname, String productcategory, float cogs, float mrp, float vat, float vatunit, int discounted, float tpunit, int coldchangeproduct) {
         this.productid = productid;
         this.productcode = productcode;
         this.name = name;
@@ -127,11 +126,11 @@ public class ProductListInfo {
         this.productcategory = productcategory;
     }
 
-    public String getCogs() {
+    public float getCogs() {
         return cogs;
     }
 
-    public void setCogs(String cogs) {
+    public void setCogs(float cogs) {
         this.cogs = cogs;
     }
 
@@ -151,35 +150,35 @@ public class ProductListInfo {
         this.vat = vat;
     }
 
-    public String getVatunit() {
+    public float getVatunit() {
         return vatunit;
     }
 
-    public void setVatunit(String vatunit) {
+    public void setVatunit(float vatunit) {
         this.vatunit = vatunit;
     }
 
-    public float getDiscounted() {
+    public int getDiscounted() {
         return discounted;
     }
 
-    public void setDiscounted(float discounted) {
+    public void setDiscounted(int discounted) {
         this.discounted = discounted;
     }
 
-    public int getTpunit() {
+    public float getTpunit() {
         return tpunit;
     }
 
-    public void setTpunit(int tpunit) {
+    public void setTpunit(float tpunit) {
         this.tpunit = tpunit;
     }
 
-    public String getColdchangeproduct() {
+    public int getColdchangeproduct() {
         return coldchangeproduct;
     }
 
-    public void setColdchangeproduct(String coldchangeproduct) {
+    public void setColdchangeproduct(int coldchangeproduct) {
         this.coldchangeproduct = coldchangeproduct;
     }
 }
