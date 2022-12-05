@@ -2,21 +2,18 @@ package com.cse.oms.View;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 
-import com.cse.oms.R;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.cse.oms.R;
 import com.cse.oms.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_ordercollection, R.id.nav_noorder,R.id.nav_customerlist,R.id.nav_productlist,R.id.nav_orderstatus,
-                R.id.nav_sentitem,R.id.nav_drafts,R.id.nav_datasync,R.id.nav_quit)
+                R.id.nav_home, R.id.create_order, R.id.nav_ordercollection, R.id.nav_noorder, R.id.nav_customerlist, R.id.nav_productlist, R.id.nav_orderstatus,
+                R.id.nav_sentitem, R.id.nav_drafts, R.id.nav_datasync, R.id.nav_quit)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

@@ -1,7 +1,5 @@
 package com.cse.oms.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,11 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.cse.oms.LoginResRoomDb.LoginResInfo;
 import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
 import com.cse.oms.Network.ApiClient;
 import com.cse.oms.Network.LoginResponse;
 import com.cse.oms.R;
+import com.cse.oms.ui.createorder.Utils.Constants;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -135,15 +136,18 @@ public class LoginActivity extends AppCompatActivity {
                     TerritoryId = loginResponse.getTerritoryId();
                     TerritoryName = loginResponse.getTerritoryName();
 
+                    Constants.TerritoryId = loginResponse.getTerritoryId();
+                    Constants.OnBehalfOfEmpId = loginResponse.getEmpId();
+
                     LoginResRoomDB db = LoginResRoomDB.getDbInstance(getApplicationContext());
 
                     try {
-                        LoginResInfo loginResInfo = new LoginResInfo(EmpId,FullName,EmpNetworkId,EmpCode,Email,MobileNo,DepartmentName,
-                                DesignationName,BUId,BUName,SalesLineId,SalesLineName,RegionId,RegionName,TeamId,TeamName,
-                                TerritoryId,TerritoryName);
+                        LoginResInfo loginResInfo = new LoginResInfo(EmpId, FullName, EmpNetworkId, EmpCode, Email, MobileNo, DepartmentName,
+                                DesignationName, BUId, BUName, SalesLineId, SalesLineName, RegionId, RegionName, TeamId, TeamName,
+                                TerritoryId, TerritoryName);
                         db.loginResDAO().insertLoginResponse(loginResInfo);
                         mProgressDialog.dismiss();
-                    } catch (Exception e){
+                    } catch (Exception e) {
                       //  Toast.makeText(getApplicationContext(),""+e,Toast.LENGTH_LONG).show();
                         mProgressDialog.dismiss();
                     }

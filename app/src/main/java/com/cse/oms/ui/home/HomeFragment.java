@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.cse.oms.LoginResRoomDb.LoginResInfo;
 import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
-import com.cse.oms.R;
 import com.cse.oms.databinding.FragmentHomeBinding;
 
 import java.util.List;
@@ -88,24 +87,24 @@ public class HomeFragment extends Fragment {
             String territoryname = list.get(0).getTerritoryName();
 
 
-            EmpId.setText("EmpId: "+Integer.toString(empid));
-            FullName.setText("FullName: "+fullname);
+            EmpId.setText("EmpId: " + empid);
+            FullName.setText("FullName: " + fullname);
             EmpNetworkId.setText("EmpNetworkId: "+empnetworkid);
             EmpCode.setText("EmpCode: "+empcode);
             Email.setText("Email: "+email);
             MobileNo.setText("MobileNo: "+mobileon);
             DepartmentName.setText("DepartmentName: "+departmentname);
-            DesignationName.setText("DesignationName: "+designationname);
-            BUId.setText("BUId: "+Integer.toString(buid));
-            BUName.setText("BUName: "+buname);
-            SalesLineId.setText("SalesLineId: "+Integer.toString(saleslineid));
-            SalesLineName.setText("SalesLineName: "+saleslinename);
-            RegionId.setText("RegionId: "+Integer.toString(regionid));
-            RegionName.setText("RegionName: "+regionname);
-            TeamId.setText("TeamId: "+Integer.toString(teamid));
-            TeamName.setText("TeamName: "+teamname);
-            TerritoryId.setText("TerritoryId: "+Integer.toString(territoryid));
-            TerritoryName.setText("TerritoryName: "+territoryname);
+            DesignationName.setText("DesignationName: " + designationname);
+            BUId.setText("BUId: " + buid);
+            BUName.setText("BUName: " + buname);
+            SalesLineId.setText("SalesLineId: " + saleslineid);
+            SalesLineName.setText("SalesLineName: " + saleslinename);
+            RegionId.setText("RegionId: " + regionid);
+            RegionName.setText("RegionName: " + regionname);
+            TeamId.setText("TeamId: " + teamid);
+            TeamName.setText("TeamName: " + teamname);
+            TerritoryId.setText("TerritoryId: " + territoryid);
+            TerritoryName.setText("TerritoryName: " + territoryname);
 
         }
 
@@ -133,24 +132,24 @@ public class HomeFragment extends Fragment {
             String territoryname = list.get(0).getTerritoryName();
 
 
-            EmpId.setText("EmpId: "+Integer.toString(empid));
-            FullName.setText("FullName: "+fullname);
+            EmpId.setText("EmpId: " + empid);
+            FullName.setText("FullName: " + fullname);
             EmpNetworkId.setText("EmpNetworkId: "+empnetworkid);
             EmpCode.setText("EmpCode: "+empcode);
             Email.setText("Email: "+email);
             MobileNo.setText("MobileNo: "+mobileon);
             DepartmentName.setText("DepartmentName: "+departmentname);
-            DesignationName.setText("DesignationName: "+designationname);
-            BUId.setText("BUId: "+Integer.toString(buid));
-            BUName.setText("BUName: "+buname);
-            SalesLineId.setText("SalesLineId: "+Integer.toString(saleslineid));
-            SalesLineName.setText("SalesLineName: "+saleslinename);
-            RegionId.setText("RegionId: "+Integer.toString(regionid));
-            RegionName.setText("RegionName: "+regionname);
-            TeamId.setText("TeamId: "+Integer.toString(teamid));
-            TeamName.setText("TeamName: "+teamname);
-            TerritoryId.setText("TerritoryId: "+Integer.toString(territoryid));
-            TerritoryName.setText("TerritoryName: "+territoryname);
+            DesignationName.setText("DesignationName: " + designationname);
+            BUId.setText("BUId: " + buid);
+            BUName.setText("BUName: " + buname);
+            SalesLineId.setText("SalesLineId: " + saleslineid);
+            SalesLineName.setText("SalesLineName: " + saleslinename);
+            RegionId.setText("RegionId: " + regionid);
+            RegionName.setText("RegionName: " + regionname);
+            TeamId.setText("TeamId: " + teamid);
+            TeamName.setText("TeamName: " + teamname);
+            TerritoryId.setText("TerritoryId: " + territoryid);
+            TerritoryName.setText("TerritoryName: " + territoryname);
 
         }
 

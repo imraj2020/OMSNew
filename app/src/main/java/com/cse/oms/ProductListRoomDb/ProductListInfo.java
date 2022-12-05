@@ -26,6 +26,11 @@ public class ProductListInfo {
     int tpunit; // Confused about its type
     String coldchangeproduct; // Confused about its type
 
+    private double amount;
+    private int quantity;
+
+    public ProductListInfo() {
+    }
 
     public ProductListInfo(int productid, String productcode, String name, String description, float tradeprice, int productstrength, float packsize, int productfamilyid, String productfamilyname, String productcategory, String cogs, float mrp, float vat, String vatunit, float discounted, int tpunit, String coldchangeproduct) {
         this.productid = productid;
@@ -181,5 +186,21 @@ public class ProductListInfo {
 
     public void setColdchangeproduct(String coldchangeproduct) {
         this.coldchangeproduct = coldchangeproduct;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

@@ -1,5 +1,10 @@
 package com.cse.oms.Network;
 
+import com.cse.oms.Network.OrderInfo.OrderBaicInfoResponse;
+import com.cse.oms.ui.createorder.model.OrderProductsModel;
+import com.cse.oms.ui.createorder.model.SubmitOrder;
+import com.cse.oms.ui.createorder.model.SubmitOrderResponce;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -15,10 +20,9 @@ public interface UserService {
     Call<Register> REGISTER_CALL(@Body Register register);
 
 
-
     @POST("api/HomeApi/Login")
     Call<LoginResponse> userLogin(
-            @Query("networkId")  String networkId,
+            @Query("networkId") String networkId,
             @Query("password") String password
     );
 
@@ -26,10 +30,26 @@ public interface UserService {
     Call<List<ProductResponse>> getProduct();
 
 
+    @GET("api/ProductApi/GetAllProduct")
+    Call<List<OrderProductsModel>> getOrderProduct();
+
+
     @GET("api/CustomerApi/GetAllCustomer")
     Call<List<CustomerResponse>> getAllCustomer(
-            @Query("territoryId")  int territoryId,
+            @Query("territoryId") int territoryId,
             @Query("scId") int scId
     );
+
+    @GET("api/NewOrderApi/GetPoInfo")
+    Call<OrderBaicInfoResponse> GetPoInfo(
+            @Query("orderNo") String orderNo,
+            @Query("verId") int verId
+    );
+
+
+    //Submit Order
+
+    @POST("api/NewOrderApi/CreateNewOrder")
+    Call<SubmitOrderResponce> SubmitOrder(@Body SubmitOrder submitOrder);
 
 }
