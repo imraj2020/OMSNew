@@ -11,6 +11,12 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
+    <fragment
+        android:id="@+id/create_order"
+        android:name="com.cse.oms.ui.createorder.SubmitOrderFragment"
+        android:label="@string/menu_createorder"
+        tools:layout="@layout/fragment_create_order" />
+
 
     <fragment
         android:id="@+id/nav_ordercollection"

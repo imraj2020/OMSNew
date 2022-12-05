@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/llCustomerDetails"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Client Name: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/text_border"
+                android:dropDownSelector="@color/green"
+                android:padding="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Order Date: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <EditText
+                android:id="@+id/OrderDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/text_border"
+                android:focusable="false"
+                android:padding="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Delivery Date: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <EditText
+                android:id="@+id/DeliveryDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/text_border"
+                android:focusable="false"
+                android:padding="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Note: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <EditText
+                android:id="@+id/Note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/text_border"
+                android:padding="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+                android:id="@+id/NextButton"
+                style="@style/loginButton"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:text="Next"
+                app:initialCornerAngle="27dp"
+                app:spinning_bar_color="#FFF"
+                app:spinning_bar_padding="6dp"
+                app:spinning_bar_width="4dp" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/llProduct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+
+                        <TextView
+                            android:id="@+id/PrevButton"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="10dp"
+                            android:layout_toStartOf="@+id/btnClearAll"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:drawableLeft="@drawable/ic_arrow_back"
+                            android:drawableTint="@android:color/black"
+                            android:padding="4dp"
+                            android:text="Prev"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/black" />
+
+                        <Button
+                            android:id="@+id/btnShowDrafts"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="10dp"
+                            android:layout_toStartOf="@+id/btnClearAll"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:padding="4dp"
+                            android:text="show drafts"
+                            android:textColor="@android:color/white" />
+
+                        <!-- <Button
+                             android:id="@+id/btnClearAll"
+                             android:layout_width="0dp"
+                             android:layout_height="30dp"
+                             android:layout_margin="10dp"
+                             android:layout_weight="1"
+                             android:padding="4dp"
+                             android:background="@color/colorPrimary"
+                             android:text="clear_all"
+                             android:textColor="@android:color/white"
+                             android:visibility="gone" />-->
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvProductList"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/purple_200"
+                        android:padding="5dp"
+                        android:text="@string/menu_productlist"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                    <TextView
+                        android:id="@+id/tvOrderDetails"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/primaryTextColor"
+                        android:padding="5dp"
+                        android:text="Order Details"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="2dp" />
+
+                <LinearLayout
+                    android:id="@+id/layoutAddProductsBillPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/layoutAddProductsBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:weightSum="5">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="name"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textSize="16sp" />
+
+                            <TextView
+
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:text="quantity"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textSize="16sp" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="amount"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="action"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvAddedProducts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="Total"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/etNetPayment"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:inputType="numberDecimal"
+                            android:text="0" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        android:visibility="gone">
+
+                        <Button
+                            android:id="@+id/btnDraft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="5dp"
+                            android:backgroundTint="#00ADC1"
+                            android:text="save"
+                            android:textColor="@android:color/white" />
+
+                        <Button
+                            android:id="@+id/button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="5dp"
+
+                            android:backgroundTint="#00ADC1"
+                            android:text="Next"
+                            android:textColor="@android:color/white" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/llReceiptVIew"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/OrderNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="Client Name: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:id="@+id/tvOrderDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:id="@+id/DelivaryDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="-------------------------------"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:id="@+id/CustomerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:id="@+id/CustomerAddrss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProductbills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="-------------------------------"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <TextView
+                android:id="@+id/TotalAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="end"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/progressbar" />
+</FrameLayout>

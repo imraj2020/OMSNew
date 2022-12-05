@@ -3,6 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/drawable/button_background_blue.xml" value="0.1765" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/drawable/progressbar_background.xml" value="0.139" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/drawable/text_border.xml" value="0.1765" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/activity_login.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/activity_main.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/dialog_show_drafts.xml" value="0.17239583333333333" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/fragment_Submit_order.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/fragment_create_order.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/fragment_create_order2.xml" value="0.165625" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/fragment_p_o_info.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/fragment_submit_order.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/item_added_product.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/item_display_product.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/item_drafts.xml" value="0.17239583333333333" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/no_order_fragment.xml" value="0.1671195652173913" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/order_product_list_customlv.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/layout/progressbar.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/menu/activity_main_drawer.xml" value="0.16770833333333332" />
+        <entry key="..\:/AndroidProjects/OMSNew/app/src/main/res/menu/main.xml" value="0.16770833333333332" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/drawable/button_background_blue.xml" value="0.26205128205128203" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/drawable/ic_add_img.xml" value="0.26205128205128203" />
         <entry key="..\:/Users/imraj/AndroidStudioProjects/OMS/app/src/main/res/drawable/spinner_border_top.xml" value="0.26614583333333336" />

@@ -18,15 +18,21 @@ public class ProductListInfo {
     int productfamilyid;
     String productfamilyname;
     String productcategory;
-    float cogs;
+    String cogs; //Confused about its type
     float mrp;
     float vat;
-    float vatunit;
-    int discounted; // Confused about its type
-    float tpunit; // Confused about its type
-    int coldchangeproduct; // Confused about its type
+    String vatunit; // Confused about its type
+    float discounted; // Confused about its type
+    int tpunit; // Confused about its type
+    String coldchangeproduct; // Confused about its type
 
-    public ProductListInfo(int productid, String productcode, String name, String description, float tradeprice, int productstrength, float packsize, int productfamilyid, String productfamilyname, String productcategory, float cogs, float mrp, float vat, float vatunit, int discounted, float tpunit, int coldchangeproduct) {
+    private double amount;
+    private int quantity;
+
+    public ProductListInfo() {
+    }
+
+    public ProductListInfo(int productid, String productcode, String name, String description, float tradeprice, int productstrength, float packsize, int productfamilyid, String productfamilyname, String productcategory, String cogs, float mrp, float vat, String vatunit, float discounted, int tpunit, String coldchangeproduct) {
         this.productid = productid;
         this.productcode = productcode;
         this.name = name;
@@ -126,11 +132,11 @@ public class ProductListInfo {
         this.productcategory = productcategory;
     }
 
-    public float getCogs() {
+    public String getCogs() {
         return cogs;
     }
 
-    public void setCogs(float cogs) {
+    public void setCogs(String cogs) {
         this.cogs = cogs;
     }
 
@@ -150,35 +156,51 @@ public class ProductListInfo {
         this.vat = vat;
     }
 
-    public float getVatunit() {
+    public String getVatunit() {
         return vatunit;
     }
 
-    public void setVatunit(float vatunit) {
+    public void setVatunit(String vatunit) {
         this.vatunit = vatunit;
     }
 
-    public int getDiscounted() {
+    public float getDiscounted() {
         return discounted;
     }
 
-    public void setDiscounted(int discounted) {
+    public void setDiscounted(float discounted) {
         this.discounted = discounted;
     }
 
-    public float getTpunit() {
+    public int getTpunit() {
         return tpunit;
     }
 
-    public void setTpunit(float tpunit) {
+    public void setTpunit(int tpunit) {
         this.tpunit = tpunit;
     }
 
-    public int getColdchangeproduct() {
+    public String getColdchangeproduct() {
         return coldchangeproduct;
     }
 
-    public void setColdchangeproduct(int coldchangeproduct) {
+    public void setColdchangeproduct(String coldchangeproduct) {
         this.coldchangeproduct = coldchangeproduct;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

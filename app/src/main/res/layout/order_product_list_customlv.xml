@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="5dp"
+    app:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_ProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                android:textColor="#72000000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_PackSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PackSize n price"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etQTY"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="QTY"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/cbItem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
