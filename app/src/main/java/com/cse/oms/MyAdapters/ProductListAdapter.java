@@ -62,7 +62,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.MRP.setText("MRP: "+Float.toString(data.getMrp()));
         holder.Vat.setText("Vat: "+Float.toString(data.getVat()));
         holder.VatUnit.setText("VatUnit: "+Float.toString(data.getVatunit()));
-        holder.Discounted.setText("Discounted: "+Integer.toString(data.getDiscounted()));
+        holder.Discounted.setText("Discounted: "+Float.toString(data.getDiscounted()));
         holder.TPUnit.setText("TPUnit: "+Float.toString(data.getTpunit()));
         holder.ColdChangeProduct.setText("ColdChangeProduct: "+Integer.toString(data.getColdchangeproduct())+"\n");
 

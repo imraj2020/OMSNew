@@ -15,14 +15,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <pl.droidsonroids.gif.GifImageView
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="180dp"
             android:layout_height="match_parent"
+            android:id="@+id/omsnew"
             android:background="#fff"
             android:src="@drawable/oms" />
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/welcomes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"
+         />
 
     <TextView
         android:id="@+id/text_home"
@@ -35,7 +45,6 @@
         android:gravity="center"
         android:textAlignment="center"
         android:textSize="20sp" />
-
 
 
     <LinearLayout
@@ -94,29 +103,29 @@
 
         <TextView
             android:id="@+id/tv_DepartmentName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_DesignationName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_BUId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_BUName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -129,36 +138,36 @@
 
         <TextView
             android:id="@+id/tv_SalesLineName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_RegionId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_RegionName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_TeamId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_TeamName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -171,8 +180,8 @@
 
         <TextView
             android:id="@+id/tv_TerritoryName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -194,16 +203,23 @@
 <!--        android:textColor="#ffff"-->
 <!--        android:textSize="20sp"-->
 <!--        android:textStyle="italic" />-->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom">
     <TextView
+        android:id="@+id/text_homes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/text_homes"
         android:layout_gravity="bottom"
-        android:layout_marginTop="100dp"
         android:gravity="bottom|center"
         android:padding="10dp"
+        android:layout_alignParentBottom="true"
         android:text="Copyright © 2022 TBS, All rights reserved."
         android:textStyle="bold"></TextView>
+    </RelativeLayout>
 
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,7 +26,8 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     TextView EmpId,FullName,EmpNetworkId,EmpCode,Email,MobileNo,DepartmentName,
             DesignationName,BUId,BUName,SalesLineId,SalesLineName,RegionId,RegionName,TeamId,TeamName,
-            TerritoryId,TerritoryName;
+            TerritoryId,TerritoryName,Welcomes;
+    ImageView OMS;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +55,8 @@ public class HomeFragment extends Fragment {
         TeamName = binding.tvTeamName;
         TerritoryId = binding.tvTerritoryId;
         TerritoryName = binding.tvTerritoryName;
+        OMS = binding.omsnew;
+        Welcomes = binding.welcomes;
 
 
         //intent
@@ -86,7 +90,7 @@ public class HomeFragment extends Fragment {
             int territoryid = list.get(0).getTerritoryId();
             String territoryname = list.get(0).getTerritoryName();
 
-
+            Welcomes.setText("Welcome  " + fullname);
             EmpId.setText("EmpId: " + empid);
             FullName.setText("FullName: " + fullname);
             EmpNetworkId.setText("EmpNetworkId: "+empnetworkid);
@@ -131,7 +135,7 @@ public class HomeFragment extends Fragment {
             int territoryid = list.get(0).getTerritoryId();
             String territoryname = list.get(0).getTerritoryName();
 
-
+            Welcomes.setText("Welcome  " + fullname);
             EmpId.setText("EmpId: " + empid);
             FullName.setText("FullName: " + fullname);
             EmpNetworkId.setText("EmpNetworkId: "+empnetworkid);
