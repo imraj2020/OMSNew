@@ -12,6 +12,8 @@ public class DraftOrderModel {
     private int orderStatus;
 
     private String dateTime;
+    private String CustomerID;
+    private String CustomerName;
     private double amount;
 
     public int getId() {
@@ -52,5 +54,21 @@ public class DraftOrderModel {
 
     public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getCustomerID() {
+        return CustomerID;
+    }
+
+    public void setCustomerID(String customerID) {
+        CustomerID = customerID;
+    }
+
+    public String getCustomerName() {
+        return CustomerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        CustomerName = customerName;
     }
 }

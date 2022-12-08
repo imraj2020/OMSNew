@@ -31,16 +31,28 @@
                 android:text="Client Name: "
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
-            <Spinner
-                android:id="@+id/spinner"
+            <TextView
+                android:id="@+id/tvCustomerList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/text_border"
-                android:dropDownSelector="@color/green"
+                android:drawableEnd="@drawable/ic_drop_down"
+                android:focusable="false"
                 android:padding="5dp"
+                android:text="Select"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
+            <!--       <Spinner
+                       android:id="@+id/spinner"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_margin="5dp"
+                       android:background="@drawable/text_border"
+                       android:dropDownSelector="@color/green"
+                       android:padding="5dp"
+                       android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+       -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

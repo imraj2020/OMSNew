@@ -2,16 +2,23 @@ package com.cse.oms.ui.createorder;
 
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -31,6 +38,7 @@ import com.cse.oms.Network.ApiClient;
 import com.cse.oms.Network.CustomerResponse;
 import com.cse.oms.Network.OrderInfo.OrderBaicInfoResponse;
 import com.cse.oms.Network.OrderInfo.OrderItem;
+import com.cse.oms.R;
 import com.cse.oms.databinding.FragmentSubmitOrderBinding;
 import com.cse.oms.ui.createorder.Adapter.AddedProductAdapter;
 import com.cse.oms.ui.createorder.Adapter.POProductAdapter;
@@ -61,8 +69,8 @@ import retrofit2.Response;
 public class SubmitOrderFragment extends Fragment {
 
     private static final String DRAFT_DIALOG = "draftDialog";
-
-    private final String UPDATE_VENDOR_TAG = "updateUserNameTag";
+    //Customer List
+    Dialog dialog;
     private final ArrayList<CustomerResponse> customers = new ArrayList<>();
     ArrayList<OrderProductsModel> productsModels = new ArrayList<>();
     ArrayList<OrderProductsModel> addedProducts = new ArrayList<>();
@@ -97,6 +105,7 @@ public class SubmitOrderFragment extends Fragment {
         binding = FragmentSubmitOrderBinding.inflate(inflater);
         initRecyclerView();
         Productlist();
+
         Customerlist();
         Onclick();
         initializeVariables();
@@ -144,6 +153,7 @@ public class SubmitOrderFragment extends Fragment {
         }
     }
 
+    /*-------------------Customer List and Spinner----------------------*/
     public void Customerlist() {
 
         Intent intent = getActivity().getIntent();
@@ -158,6 +168,7 @@ public class SubmitOrderFragment extends Fragment {
                 if (response.isSuccessful()) {
 
                     List<CustomerResponse> nlist = response.body();
+                    customers.addAll(response.body());
                     addSpinnerData(nlist);
 
 
@@ -174,37 +185,86 @@ public class SubmitOrderFragment extends Fragment {
             }
         });
     }
-
-
     public void addSpinnerData(final List<CustomerResponse> body) {
-        List<String> CustomerResponseList = new ArrayList<>();
-        // CustomerResponseList.add(0, selectOne);
-        for (int i = 0; i < body.size(); i++) {
-            CustomerResponseList.add(i, body.get(i).getName());
-        }
-
-        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, CustomerResponseList);
-        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.spinner.setAdapter(dataAdapter2);
-        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.tvCustomerList.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                try {
-                    CustomerID = body.get(i).getCustomerId();
-                    Toast.makeText(getContext(), body.get(i).getCustomerId(), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    //  Utilities.showLogcatMessage(" " + e.toString());
+            public void onClick(View v) {
+                // Initialize dialog
+                dialog = new Dialog(getContext());
 
+                // set custom dialog
+                dialog.setContentView(R.layout.dialog_searchable_spinner);
+
+                // set transparent background
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                // show dialog
+                dialog.show();
+
+                // Initialize and assign variable
+                EditText editText = dialog.findViewById(R.id.edit_text);
+                ListView listView = dialog.findViewById(R.id.list_view);
+
+                // Initialize array adapter
+                List<String> CustomerResponseList = new ArrayList<>();
+                CustomerResponseList.add(0, "select");
+                for (int i = 1; i < body.size(); i++) {
+                    CustomerResponseList.add(i, body.get(i).getName() + "\n Address:" + body.get(i).getAddress());
                 }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, CustomerResponseList);
+                listView.setAdapter(adapter);
+                editText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        adapter.getFilter().filter(s);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+
+
+                });
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        binding.tvCustomerList.setText(adapter.getItem(position));
+
+                        try {
+                            // Toast.makeText(getContext(),binding.tvCustomerList.getText().toString(), Toast.LENGTH_SHORT).show();
+                            CustomerID = getCustomerIdFromName(binding.tvCustomerList.getText().toString());
+                            // Toast.makeText(getContext(),"CustomerID"+CustomerID, Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Utilities.showLogcatMessage("binding.tvCustomerList " + e);
+
+                        }
+                        // Dismiss dialog
+                        dialog.dismiss();
+                    }
+                });
             }
         });
     }
 
+    public String getCustomerIdFromName(String name) {
+        for (CustomerResponse customerModel : customers) {
+            if ((customerModel.getName() + "\n Address:" + customerModel.getAddress()).equalsIgnoreCase(name))
+                return customerModel.getCustomerId();
+
+        }
+        return Constants.DUMMY_USER;
+    }
+
+
+    /*-------------------Product List----------------------*/
     public void Productlist() {
 
         Call<List<OrderProductsModel>> call = ApiClient.getUserService().getOrderProduct();
@@ -224,7 +284,6 @@ public class SubmitOrderFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<OrderProductsModel>> call, Throwable t) {
-                // Holidayres.setText(t.getMessage());
                 Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
             }
         });
@@ -240,6 +299,8 @@ public class SubmitOrderFragment extends Fragment {
                 DraftOrderModel draftOrderModel = new DraftOrderModel();
                 draftOrderModel.setDateTime(Utilities.getFormattedDateTime(Calendar.getInstance()));
                 draftOrderModel.setOrderStatus(Constants.SALE_DRAFT_ORDER);
+                draftOrderModel.setCustomerID(CustomerID);
+                draftOrderModel.setCustomerName(binding.tvCustomerList.getText().toString());
                 long orderID = orderDatabase.daoAccess().insertOrder(draftOrderModel);
 
                 for (int i = 0; i < addedProducts.size(); i++) {

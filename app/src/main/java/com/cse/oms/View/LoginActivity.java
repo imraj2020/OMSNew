@@ -138,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Constants.TerritoryId = loginResponse.getTerritoryId();
                     Constants.OnBehalfOfEmpId = loginResponse.getEmpId();
+                    Constants.EmpCode = loginResponse.getEmpCode();
 
                     LoginResRoomDB db = LoginResRoomDB.getDbInstance(getApplicationContext());
 
