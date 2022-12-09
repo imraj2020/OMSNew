@@ -3,6 +3,8 @@ package com.cse.oms.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,9 +13,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.cse.oms.LoginResRoomDb.LoginResInfo;
+import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
 import com.cse.oms.R;
 import com.cse.oms.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +43,24 @@ public class MainActivity extends AppCompatActivity {
 //        });
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+
+
+
+        //testing nav header
+        LoginResRoomDB database = LoginResRoomDB.getDbInstance(getApplicationContext());
+        List<LoginResInfo> list = database.loginResDAO().getAllData();
+        String fullname = list.get(0).getFullName();
+        String email = list.get(0).getEmail();
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView Name = (TextView) headerView.findViewById(R.id.hellouser);
+        TextView Email = (TextView) headerView.findViewById(R.id.myemail);
+        Name.setText("Hello , "+fullname);
+        Email.setText(email);
+
+
+
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(

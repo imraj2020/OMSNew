@@ -44,10 +44,6 @@ public class OrderCollectionFragment extends Fragment implements CustomerListAda
     SearchView MySearch;
 
 
-    public OrderCollectionFragment() {
-    }
-
-
     public static OrderCollectionFragment newInstance() {
         return new OrderCollectionFragment();
     }

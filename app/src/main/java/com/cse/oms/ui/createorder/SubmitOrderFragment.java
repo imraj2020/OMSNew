@@ -34,6 +34,8 @@ import androidx.transition.TransitionSet;
 
 import com.cse.oms.CreateOrderRoomDatabase.models.DraftOrderModel;
 import com.cse.oms.CreateOrderRoomDatabase.models.DraftProductModel;
+import com.cse.oms.LoginResRoomDb.LoginResInfo;
+import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
 import com.cse.oms.Network.ApiClient;
 import com.cse.oms.Network.CustomerResponse;
 import com.cse.oms.Network.OrderInfo.OrderBaicInfoResponse;
@@ -277,7 +279,7 @@ public class SubmitOrderFragment extends Fragment {
                     productsModels.clear();
                     productsModels.addAll(response.body());
                     saleProductAdapter.notifyDataSetChanged();
-                    Toast.makeText(getContext(), "response.body()", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(), "response.body()", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -432,7 +434,14 @@ public class SubmitOrderFragment extends Fragment {
         submitOrder.setOrderDate(binding.OrderDate.getText().toString());
         submitOrder.setDeliveryDate(binding.DeliveryDate.getText().toString());
         submitOrder.setEntryDateTime(entryTime);
-        submitOrder.setEntryBy(56);
+
+        LoginResRoomDB database = LoginResRoomDB.getDbInstance(requireContext());
+        List<LoginResInfo> list = database.loginResDAO().getAllData();
+        int empid = list.get(0).getEmpId();
+        int saleslineid = list.get(0).getSalesLineId();
+
+
+        submitOrder.setEntryBy(empid);
         submitOrder.setNote(binding.Note.getText().toString());
         submitOrder.setTerritoryId(Constants.TerritoryId);
         submitOrder.setSCId("1");

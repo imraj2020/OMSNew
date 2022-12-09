@@ -23,7 +23,7 @@
     <string name="menu_sentitem">Sent Item</string>
     <string name="menu_drafts">Drafts</string>
     <string name="menu_datasync">Data Sync</string>
-    <string name="menu_quit">Quit</string>
+    <string name="menu_quit">Logout</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

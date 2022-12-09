@@ -12,13 +12,16 @@ public class ProductResponse {
     int ProductFamilyId;
     String ProductFamilyName;
     String ProductCategory;
-    String COGS; //Confused about its type
+
+    float COGS; //Confused about its type
     float MRP;
     float Vat;
-    String VatUnit; // Confused about its type
-    float Discounted; // Confused about its type
-    int TPUnit; // Confused about its type
-    String ColdChangeProduct; // Confused about its type
+
+    float VatUnit; // Confused about its type
+
+    int Discounted; // Confused about its type
+    float TPUnit; // Confused about its type
+    int ColdChangeProduct; // Confused about its type
 
     public int getProductId() {
         return ProductId;
@@ -100,11 +103,11 @@ public class ProductResponse {
         ProductCategory = productCategory;
     }
 
-    public String getCOGS() {
+    public Float getCOGS() {
         return COGS;
     }
 
-    public void setCOGS(String COGS) {
+    public void setCOGS(Float COGS) {
         this.COGS = COGS;
     }
 
@@ -124,35 +127,35 @@ public class ProductResponse {
         Vat = vat;
     }
 
-    public String getVatUnit() {
+    public Float getVatUnit() {
         return VatUnit;
     }
 
-    public void setVatUnit(String vatUnit) {
+    public void setVatUnit(Float vatUnit) {
         VatUnit = vatUnit;
     }
 
-    public float getDiscounted() {
+    public int getDiscounted() {
         return Discounted;
     }
 
-    public void setDiscounted(float discounted) {
+    public void setDiscounted(int discounted) {
         Discounted = discounted;
     }
 
-    public int getTPUnit() {
+    public Float getTPUnit() {
         return TPUnit;
     }
 
-    public void setTPUnit(int TPUnit) {
+    public void setTPUnit(Float TPUnit) {
         this.TPUnit = TPUnit;
     }
 
-    public String getColdChangeProduct() {
+    public int getColdChangeProduct() {
         return ColdChangeProduct;
     }
 
-    public void setColdChangeProduct(String coldChangeProduct) {
+    public void setColdChangeProduct(int coldChangeProduct) {
         ColdChangeProduct = coldChangeProduct;
     }
 }
