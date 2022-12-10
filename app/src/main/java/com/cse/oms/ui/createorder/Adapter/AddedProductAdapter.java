@@ -49,6 +49,10 @@ public class AddedProductAdapter extends RecyclerView.Adapter<AddedProductAdapte
         final double sellPrice = items.get(position).getMRP();
         holder.tvAmount.setText(String.format("%.2f", items.get(position).getAmount()));
         items.get(position).setAmount(quantity * purchasePrice);
+        items.get(position).setProductId(items.get(position).getProductId());
+        items.get(position).setQuantity(items.get(position).getQuantity());
+        items.get(position).setUnitPrice(Double.parseDouble(String.valueOf(items.get(position).getTradePrice())));
+        items.get(position).setStatus(0);
         EventBus.getDefault().post(new MessageEvent(true));
 
 

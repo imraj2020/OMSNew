@@ -14,6 +14,10 @@ public class DraftOrderModel {
     private String dateTime;
     private String CustomerID;
     private String CustomerName;
+    private String OrderDate;
+    private String DeliveryDate;
+    private String EntryTime;
+    private String Note;
     private double amount;
 
     public int getId() {
@@ -70,5 +74,37 @@ public class DraftOrderModel {
 
     public void setCustomerName(String customerName) {
         CustomerName = customerName;
+    }
+
+    public String getOrderDate() {
+        return OrderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        OrderDate = orderDate;
+    }
+
+    public String getDeliveryDate() {
+        return DeliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        DeliveryDate = deliveryDate;
+    }
+
+    public String getEntryTime() {
+        return EntryTime;
+    }
+
+    public void setEntryTime(String entryTime) {
+        EntryTime = entryTime;
+    }
+
+    public String getNote() {
+        return Note;
+    }
+
+    public void setNote(String note) {
+        Note = note;
     }
 }

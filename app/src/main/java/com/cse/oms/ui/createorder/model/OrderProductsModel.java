@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class OrderProductsModel implements Serializable {
-    private final static long serialVersionUID = -1365245772360690345L;
     String ProductCode;
     String Name;
     String Description;

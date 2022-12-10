@@ -55,20 +55,18 @@ public class DraftAdapter extends RecyclerView.Adapter<DraftAdapter.DraftViewHol
 
     public class DraftViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvOrderId, tvDateTime;
+        TextView tvOrderId, tvCustomerName;
         ImageView imgAddDrafts, ivDelete;
 
         public DraftViewHolder(View itemView) {
             super(itemView);
-            tvOrderId = itemView.findViewById(R.id.tvOrderId);
-            tvDateTime = itemView.findViewById(R.id.tvDateTime);
+            tvCustomerName = itemView.findViewById(R.id.tvCustomerName);
             imgAddDrafts = itemView.findViewById(R.id.ivAddDrafts);
             ivDelete = itemView.findViewById(R.id.ivDelete);
         }
 
         public void set(final DraftOrderModel item) {
-            tvOrderId.setText(String.valueOf(item.getId()));
-            tvDateTime.setText(item.getDateTime());
+            tvCustomerName.setText(item.getId() + ". " + item.getCustomerName());
             imgAddDrafts.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

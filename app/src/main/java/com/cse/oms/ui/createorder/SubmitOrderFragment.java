@@ -46,7 +46,6 @@ import com.cse.oms.ui.createorder.Adapter.AddedProductAdapter;
 import com.cse.oms.ui.createorder.Adapter.POProductAdapter;
 import com.cse.oms.ui.createorder.Adapter.SaleProductAdapter;
 import com.cse.oms.ui.createorder.Utils.Constants;
-import com.cse.oms.ui.createorder.Utils.ShowDraftsDialog;
 import com.cse.oms.ui.createorder.Utils.Utilities;
 import com.cse.oms.ui.createorder.model.OrderProductsModel;
 import com.cse.oms.ui.createorder.model.SubmitOrder;
@@ -303,15 +302,20 @@ public class SubmitOrderFragment extends Fragment {
                 draftOrderModel.setOrderStatus(Constants.SALE_DRAFT_ORDER);
                 draftOrderModel.setCustomerID(CustomerID);
                 draftOrderModel.setCustomerName(binding.tvCustomerList.getText().toString());
+                draftOrderModel.setOrderDate(binding.tvOrderDate.getText().toString());
+                draftOrderModel.setDeliveryDate(binding.DeliveryDate.getText().toString());
+                draftOrderModel.setNote(binding.Note.getText().toString());
+                draftOrderModel.setEntryTime(entryTime);
+                draftOrderModel.setCustomerName(binding.tvCustomerList.getText().toString());
+                draftOrderModel.setAmount(Double.parseDouble(binding.etNetPayment.getText().toString()));
                 long orderID = orderDatabase.daoAccess().insertOrder(draftOrderModel);
 
                 for (int i = 0; i < addedProducts.size(); i++) {
-                    OrderProductsModel ProductListInfo = addedProducts.get(i);
                     DraftProductModel draftProductModel = new DraftProductModel();
-                    draftProductModel.setName(ProductListInfo.getName());
+                    draftProductModel.setName(addedProducts.get(i).getName());
                     draftProductModel.setOrderId((int) orderID);
-                    draftProductModel.setAmount(ProductListInfo.getAmount());
-                    draftProductModel.setQuantity(ProductListInfo.getQuantity());
+                    draftProductModel.setAmount(addedProducts.get(i).getAmount());
+                    draftProductModel.setQuantity(addedProducts.get(i).getQuantity());
                     orderDatabase.daoAccess().insertProduct(draftProductModel);
                 }
                 getActivity().runOnUiThread(new Runnable() {
@@ -342,7 +346,7 @@ public class SubmitOrderFragment extends Fragment {
         binding.btnShowDrafts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnShowDraftsOnClick();
+                //btnShowDraftsOnClick();
             }
         });
 
@@ -430,6 +434,9 @@ public class SubmitOrderFragment extends Fragment {
         //showProgressBar(true);
         SubmitOrder submitOrder = new SubmitOrder();
         submitOrder.setOrderDetails(addedProducts);
+        Utilities.showLogcatMessage(String.valueOf(submitOrder.getOrderDetails().get(0).getUnitPrice()));
+        Utilities.showLogcatMessage(String.valueOf(submitOrder.getOrderDetails().get(0).getQuantity()));
+        Utilities.showLogcatMessage(String.valueOf(submitOrder.getOrderDetails().get(0).getStatus()));
         submitOrder.setCustomerId(CustomerID);
         submitOrder.setOrderDate(binding.OrderDate.getText().toString());
         submitOrder.setDeliveryDate(binding.DeliveryDate.getText().toString());
@@ -444,7 +451,7 @@ public class SubmitOrderFragment extends Fragment {
         submitOrder.setEntryBy(empid);
         submitOrder.setNote(binding.Note.getText().toString());
         submitOrder.setTerritoryId(Constants.TerritoryId);
-        submitOrder.setSCId("1");
+        submitOrder.setSCId(String.valueOf(saleslineid));
         submitOrder.setOnBehalfOfEmpId(Constants.OnBehalfOfEmpId);
         ProgressDialog mProgressDialog = new ProgressDialog(getContext());
         mProgressDialog.setIndeterminate(true);
@@ -486,12 +493,12 @@ public class SubmitOrderFragment extends Fragment {
     }
 
 
-    public void btnShowDraftsOnClick() {
+  /*  public void btnShowDraftsOnClick() {
         ShowDraftsDialog showDraftsDialog = new ShowDraftsDialog();
 
         showDraftsDialog.setOrderStatus(Constants.SALE_DRAFT_ORDER);
         showDraftsDialog.show(getFragmentManager(), DRAFT_DIALOG);
-    }
+    }*/
 
     private void updateTotal() {
         double total = 0;
@@ -628,7 +635,7 @@ public class SubmitOrderFragment extends Fragment {
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+   /* @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDraftProductAdded(DraftOrderModel draftOrderModel) {
         new Thread(new Runnable() {
             @Override
@@ -637,7 +644,7 @@ public class SubmitOrderFragment extends Fragment {
             }
         }).start();
 
-    }
+    }*/
 
 
     @Override
