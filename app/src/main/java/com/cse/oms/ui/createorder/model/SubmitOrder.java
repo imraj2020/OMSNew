@@ -125,7 +125,7 @@ public class SubmitOrder {
         sb.append(SubmitOrder.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("orderDetails");
         sb.append('=');
-        sb.append(((this.orderDetails == null) ? "<null>" : this.orderDetails));
+        sb.append(((this.orderDetails == null) ? "<null>" : this.orderDetails.toString()));
         sb.append(',');
         sb.append("customerId");
         sb.append('=');

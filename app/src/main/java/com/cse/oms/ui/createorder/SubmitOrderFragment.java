@@ -32,6 +32,7 @@ import androidx.transition.Fade;
 import androidx.transition.TransitionManager;
 import androidx.transition.TransitionSet;
 
+import com.cse.oms.CreateOrderRoomDatabase.database.OrderDatabase;
 import com.cse.oms.CreateOrderRoomDatabase.models.DraftOrderModel;
 import com.cse.oms.CreateOrderRoomDatabase.models.DraftProductModel;
 import com.cse.oms.LoginResRoomDb.LoginResInfo;
@@ -50,7 +51,7 @@ import com.cse.oms.ui.createorder.Utils.Utilities;
 import com.cse.oms.ui.createorder.model.OrderProductsModel;
 import com.cse.oms.ui.createorder.model.SubmitOrder;
 import com.cse.oms.ui.createorder.model.SubmitOrderResponce;
-import com.cse.oms.ui.createorder.roomdb.OrderDatabase;
+import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -131,7 +132,7 @@ public class SubmitOrderFragment extends Fragment {
         mYear = calendar.get(Calendar.YEAR);
         mMonth = calendar.get(Calendar.MONTH);
         mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
         binding.OrderDate.setText(formatter.format(calendar.getTime()));
         binding.DeliveryDate.setText(formatter.format(calendar.getTime()));
@@ -302,16 +303,16 @@ public class SubmitOrderFragment extends Fragment {
                 draftOrderModel.setOrderStatus(Constants.SALE_DRAFT_ORDER);
                 draftOrderModel.setCustomerID(CustomerID);
                 draftOrderModel.setCustomerName(binding.tvCustomerList.getText().toString());
-                draftOrderModel.setOrderDate(binding.tvOrderDate.getText().toString());
+                draftOrderModel.setOrderDate(binding.OrderDate.getText().toString());
                 draftOrderModel.setDeliveryDate(binding.DeliveryDate.getText().toString());
                 draftOrderModel.setNote(binding.Note.getText().toString());
                 draftOrderModel.setEntryTime(entryTime);
-                draftOrderModel.setCustomerName(binding.tvCustomerList.getText().toString());
                 draftOrderModel.setAmount(Double.parseDouble(binding.etNetPayment.getText().toString()));
                 long orderID = orderDatabase.daoAccess().insertOrder(draftOrderModel);
 
                 for (int i = 0; i < addedProducts.size(); i++) {
                     DraftProductModel draftProductModel = new DraftProductModel();
+                    draftProductModel.setProductId(addedProducts.get(i).getProductId());
                     draftProductModel.setName(addedProducts.get(i).getName());
                     draftProductModel.setOrderId((int) orderID);
                     draftProductModel.setAmount(addedProducts.get(i).getAmount());
@@ -343,12 +344,7 @@ public class SubmitOrderFragment extends Fragment {
                 submitBtnOnClick();
             }
         });
-        binding.btnShowDrafts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //btnShowDraftsOnClick();
-            }
-        });
+
 
         binding.DeliveryDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -363,7 +359,7 @@ public class SubmitOrderFragment extends Fragment {
                                 calendar.set(Calendar.MONTH, selectedMonth);
                                 calendar.set(Calendar.DAY_OF_MONTH, selectedDay);
 
-                                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                                 binding.DeliveryDate.setText(formatter.format(calendar.getTime()));
                             }
                         }, mYear, mMonth, mDay);
@@ -386,7 +382,7 @@ public class SubmitOrderFragment extends Fragment {
                                 calendar.set(Calendar.MONTH, selectedMonth);
                                 calendar.set(Calendar.DAY_OF_MONTH, selectedDay);
 
-                                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                                 binding.OrderDate.setText(formatter.format(calendar.getTime()));
                             }
                         }, mYear, mMonth, mDay);
@@ -434,9 +430,6 @@ public class SubmitOrderFragment extends Fragment {
         //showProgressBar(true);
         SubmitOrder submitOrder = new SubmitOrder();
         submitOrder.setOrderDetails(addedProducts);
-        Utilities.showLogcatMessage(String.valueOf(submitOrder.getOrderDetails().get(0).getUnitPrice()));
-        Utilities.showLogcatMessage(String.valueOf(submitOrder.getOrderDetails().get(0).getQuantity()));
-        Utilities.showLogcatMessage(String.valueOf(submitOrder.getOrderDetails().get(0).getStatus()));
         submitOrder.setCustomerId(CustomerID);
         submitOrder.setOrderDate(binding.OrderDate.getText().toString());
         submitOrder.setDeliveryDate(binding.DeliveryDate.getText().toString());
@@ -458,7 +451,10 @@ public class SubmitOrderFragment extends Fragment {
         mProgressDialog.setMessage("Loading...");
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
-        Utilities.showLogcatMessage("DATA" + submitOrder);
+
+        Gson g = new Gson();
+        String str = g.toJson(submitOrder);
+        Utilities.showLogcatMessage("DATA" + str);
         Call<SubmitOrderResponce> SubmitOrderResponceCall = ApiClient.getUserService().SubmitOrder(submitOrder);
         SubmitOrderResponceCall.enqueue(new Callback<SubmitOrderResponce>() {
             @Override
@@ -492,13 +488,6 @@ public class SubmitOrderFragment extends Fragment {
 
     }
 
-
-  /*  public void btnShowDraftsOnClick() {
-        ShowDraftsDialog showDraftsDialog = new ShowDraftsDialog();
-
-        showDraftsDialog.setOrderStatus(Constants.SALE_DRAFT_ORDER);
-        showDraftsDialog.show(getFragmentManager(), DRAFT_DIALOG);
-    }*/
 
     private void updateTotal() {
         double total = 0;
@@ -547,11 +536,11 @@ public class SubmitOrderFragment extends Fragment {
 
                 if (response.isSuccessful()) {
                     binding.OrderNo.setText(response.body().getOrderBaicInfo().getOrderNo());
-                    binding.OrderDate.setText(response.body().getOrderBaicInfo().getOrderDate());
+                    binding.tvOrderDate.setText(response.body().getOrderBaicInfo().getOrderDate());
                     binding.DelivaryDate.setText(response.body().getOrderBaicInfo().getDeliveryDate());
                     binding.CustomerName.setText(response.body().getOrderBaicInfo().getCustomerName());
                     binding.CustomerAddrss.setText(response.body().getOrderBaicInfo().getCustomerAddress());
-                    binding.TotalAmount.setText(response.body().getOrderBaicInfo().getTotalOrderPrice().toString());
+                    binding.TotalAmount.setText(String.format("%.2f", response.body().getOrderBaicInfo().getTotalOrderPrice()));
                     productList.clear();
                     productList.addAll(response.body().getOrderItemList());
                     productAdapter.notifyDataSetChanged();
@@ -582,7 +571,7 @@ public class SubmitOrderFragment extends Fragment {
                 addedProducts.clear();
                 for (DraftProductModel draftProductModel : draftProductModels) {
                     OrderProductsModel productsModel = new OrderProductsModel();
-                    productsModel.setId(draftProductModel.getId());
+                    productsModel.setProductId(draftProductModel.getId());
                     productsModel.setName(draftProductModel.getName());
                     productsModel.setQuantity(draftProductModel.getQuantity());
                     productsModel.setAmount(draftProductModel.getAmount());
@@ -607,7 +596,7 @@ public class SubmitOrderFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAddProduct(OrderProductsModel productsModel) {
         for (OrderProductsModel productsModel1 : addedProducts) {
-            if (productsModel1.getId() == productsModel.getId()) {
+            if (productsModel1.getProductId() == productsModel.getProductId()) {
                 double quantity = productsModel1.getQuantity() + productsModel.getQuantity();
                 productsModel1.setQuantity(quantity);
                 updateTotal();

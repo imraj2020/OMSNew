@@ -10,12 +10,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.cse.oms.CreateOrderRoomDatabase.database.OrderDatabase;
 import com.cse.oms.CreateOrderRoomDatabase.models.DraftOrderModel;
 import com.cse.oms.R;
 import com.cse.oms.ui.createorder.MessageEvent;
 import com.cse.oms.ui.createorder.Utils.Constants;
 import com.cse.oms.ui.createorder.model.ShowDraftOrder;
-import com.cse.oms.ui.createorder.roomdb.OrderDatabase;
 
 import org.greenrobot.eventbus.EventBus;
 

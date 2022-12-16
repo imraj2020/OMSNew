@@ -22,14 +22,18 @@ import androidx.transition.Fade;
 import androidx.transition.TransitionManager;
 import androidx.transition.TransitionSet;
 
+import com.cse.oms.CreateOrderRoomDatabase.database.OrderDatabase;
 import com.cse.oms.CreateOrderRoomDatabase.models.DraftOrderModel;
 import com.cse.oms.CreateOrderRoomDatabase.models.DraftProductModel;
 import com.cse.oms.LoginResRoomDb.LoginResInfo;
 import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
 import com.cse.oms.Network.ApiClient;
+import com.cse.oms.Network.OrderInfo.OrderBaicInfoResponse;
+import com.cse.oms.Network.OrderInfo.OrderItem;
 import com.cse.oms.databinding.DraftsFragmentBinding;
 import com.cse.oms.ui.createorder.Adapter.AddedProductAdapter;
 import com.cse.oms.ui.createorder.Adapter.DraftAdapter;
+import com.cse.oms.ui.createorder.Adapter.POProductAdapter;
 import com.cse.oms.ui.createorder.Adapter.SaleProductAdapter;
 import com.cse.oms.ui.createorder.MessageEvent;
 import com.cse.oms.ui.createorder.UiModificationEvent;
@@ -39,7 +43,6 @@ import com.cse.oms.ui.createorder.model.OrderProductsModel;
 import com.cse.oms.ui.createorder.model.ShowDraftOrder;
 import com.cse.oms.ui.createorder.model.SubmitOrder;
 import com.cse.oms.ui.createorder.model.SubmitOrderResponce;
-import com.cse.oms.ui.createorder.roomdb.OrderDatabase;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -70,6 +73,11 @@ public class DraftsFragment extends Fragment {
     private OrderDatabase orderDatabase;
     private int orderStatus;
 
+    ArrayList<OrderItem> productList = new ArrayList<>();
+
+    //Receipt Preview
+    POProductAdapter productAdapter;
+
     public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
     }
@@ -92,8 +100,9 @@ public class DraftsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = DraftsFragmentBinding.inflate(inflater);
-        initViews();
+
         initRecyclerView();
+        initReceiptRecyclerView();
         showDraftOrders();
         Onclick();
         Productlist();
@@ -101,24 +110,23 @@ public class DraftsFragment extends Fragment {
 
     }
 
-    private void initViews() {
-        draftAdapter = new DraftAdapter(draftOrderModels, getContext());
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        binding.rvDrafts.setLayoutManager(layoutManager);
-        binding.rvDrafts.setAdapter(draftAdapter);
-    }
-
     private void initRecyclerView() {
         try {
+            draftAdapter = new DraftAdapter(draftOrderModels, getContext());
+
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+            binding.rvDrafts.setLayoutManager(layoutManager);
+            binding.rvDrafts.setAdapter(draftAdapter);
+
+
             saleProductAdapter = new SaleProductAdapter(productsModels, getContext());
             addedProductAdapter = new AddedProductAdapter(addedProducts, getContext());
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-            binding.rvProducts.setLayoutManager(layoutManager);
+            RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            binding.rvProducts.setLayoutManager(layoutManager1);
             binding.rvProducts.setAdapter(saleProductAdapter);
 
-            RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext());
-            binding.rvAddedProducts.setLayoutManager(layoutManager1);
+            RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getContext());
+            binding.rvAddedProducts.setLayoutManager(layoutManager2);
             binding.rvAddedProducts.setAdapter(addedProductAdapter);
         } catch (Exception e) {
             e.printStackTrace();
@@ -276,7 +284,7 @@ public class DraftsFragment extends Fragment {
                 addedProducts.clear();
                 for (DraftProductModel draftProductModel : draftProductModels) {
                     OrderProductsModel productsModel = new OrderProductsModel();
-                    productsModel.setId(draftProductModel.getId());
+                    productsModel.setProductId(draftProductModel.getProductId());
                     productsModel.setName(draftProductModel.getName());
                     productsModel.setQuantity(draftProductModel.getQuantity());
                     productsModel.setAmount(draftProductModel.getAmount());
@@ -336,9 +344,9 @@ public class DraftsFragment extends Fragment {
                     mProgressDialog.dismiss();
                     Constants.OrderNo = submitOrderResponce.getOrderNo();
                     Constants.VerId = submitOrderResponce.getOrderVersion();
-                 /*   binding.llProduct.setVisibility(View.GONE);
+                    binding.llProduct.setVisibility(View.GONE);
                     binding.llReceiptVIew.setVisibility(View.VISIBLE);
-                    RetriveData();*/
+                    RetriveData();
 
                 } else {
                     mProgressDialog.dismiss();
@@ -358,6 +366,56 @@ public class DraftsFragment extends Fragment {
 
     }
 
+    //Receipt Preview
+
+    private void initReceiptRecyclerView() {
+        try {
+            productAdapter = new POProductAdapter(productList, getContext());
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            binding.rvProductbills.setLayoutManager(layoutManager);
+            binding.rvProductbills.setAdapter(productAdapter);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void RetriveData() {
+
+        //  Intent intent = getActivity().getIntent();
+        String OrderNo = Constants.OrderNo;
+        int VerID = Constants.VerId;
+        Call<OrderBaicInfoResponse> call = ApiClient.getUserService().GetPoInfo(OrderNo, VerID);
+        call.enqueue(new Callback<OrderBaicInfoResponse>() {
+
+            @Override
+            public void onResponse(Call<OrderBaicInfoResponse> call, Response<OrderBaicInfoResponse> response) {
+
+                if (response.isSuccessful()) {
+                    binding.OrderNo.setText(response.body().getOrderBaicInfo().getOrderNo());
+                    binding.tvOrderDate.setText(response.body().getOrderBaicInfo().getOrderDate());
+                    binding.DelivaryDate.setText(response.body().getOrderBaicInfo().getDeliveryDate());
+                    binding.CustomerName.setText(response.body().getOrderBaicInfo().getCustomerName());
+                    binding.CustomerAddrss.setText(response.body().getOrderBaicInfo().getCustomerAddress());
+                    binding.TotalAmount.setText(response.body().getOrderBaicInfo().getTotalOrderPrice().toString());
+                    productList.clear();
+                    productList.addAll(response.body().getOrderItemList());
+                    productAdapter.notifyDataSetChanged();
+
+
+                } else {
+                    Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<OrderBaicInfoResponse> call, Throwable t) {
+                // Holidayres.setText(t.getMessage());
+                Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDraftProductAdded(DraftOrderModel draftOrderModel) {
@@ -373,7 +431,7 @@ public class DraftsFragment extends Fragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAddProduct(OrderProductsModel productsModel) {
         for (OrderProductsModel productsModel1 : addedProducts) {
-            if (productsModel1.getId() == productsModel.getId()) {
+            if (productsModel1.getProductId() == productsModel.getProductId()) {
                 double quantity = productsModel1.getQuantity() + productsModel.getQuantity();
                 productsModel1.setQuantity(quantity);
                 updateTotal();
