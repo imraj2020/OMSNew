@@ -35,6 +35,15 @@ public class OrderProductsModel implements Serializable {
     @Expose
     private Integer status;
     private double Amount;
+    private boolean isChecked;
+
+    public boolean getChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public Integer getProductId() {
         return ProductId;

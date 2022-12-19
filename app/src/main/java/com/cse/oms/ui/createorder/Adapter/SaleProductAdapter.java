@@ -73,47 +73,60 @@ public class SaleProductAdapter extends RecyclerView.Adapter<SaleProductAdapter.
             ivRemove = itemView.findViewById(R.id.ivRemove);
             ivAdd = itemView.findViewById(R.id.ivAdd);
             cbItem = itemView.findViewById(R.id.cbItem);
+            this.setIsRecyclable(false);
         }
 
         public void set(final OrderProductsModel item) {
             //UI setting code
             tvProductName.setText(item.getName());
             tvPackSize.setText("PackSize: " + item.getPackSize() + "|" + " Price: " + item.getTradePrice());
-            cbItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            // cbItem.setOnCheckedChangeListener(null);
+            if (item.getChecked()) {
+                cbItem.setChecked(true);
+                etQTY.setText(String.valueOf(item.getQuantity()));
+            } else {
+                cbItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-                                                  @Override
-                                                  public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                                      if (isChecked) {
-                                                          if (etQTY.getText().toString().equals("")) {
-                                                              Toast.makeText(context, "Please Enter QTY" + etQTY.getText().toString(), Toast.LENGTH_SHORT).show();
-                                                              cbItem.setChecked(false);
-                                                          } else {
+                                                      @Override
+                                                      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                          if (isChecked) {
+                                                              int adapterPosition = getAdapterPosition();
+                                                              if (etQTY.getText().toString().equals("")) {
+                                                                  Toast.makeText(context, "Please Enter QTY" + etQTY.getText().toString(), Toast.LENGTH_SHORT).show();
+                                                                  cbItem.setChecked(false);
+                                                                  items.get(adapterPosition).setChecked(false);
+                                                              } else {
+                                                                  item.setChecked(true);
+                                                                  cbItem.setChecked(true);
+                                                                  items.get(adapterPosition).setChecked(true);
 
-                                                              double quantity = 0.0;
-                                                              try {
-                                                                  quantity = Double.parseDouble(etQTY.getText().toString());
-                                                                  if (quantity == 0.0)
-                                                                      return;
-                                                              } catch (Exception e) {
-                                                                  e.printStackTrace();
+                                                                  double quantity = 0.0;
+                                                                  try {
+                                                                      quantity = Double.parseDouble(etQTY.getText().toString());
+                                                                      if (quantity == 0.0)
+                                                                          return;
+                                                                  } catch (Exception e) {
+                                                                      e.printStackTrace();
+                                                                  }
+                                                                  item.setQuantity(quantity);
+                                                                  OrderProductsModel orderProductsModel = new OrderProductsModel();
+                                                                  orderProductsModel.setProductId(item.getProductId());
+                                                                  orderProductsModel.setName(item.getName());
+                                                                  orderProductsModel.setQuantity(quantity);
+                                                                  orderProductsModel.setTradePrice(item.getTradePrice());
+                                                                  orderProductsModel.setAmount(item.getTradePrice() * quantity);
+                                                                  orderProductsModel.setMRP(item.getMRP());
+                                                                  EventBus.getDefault().post(orderProductsModel);
+
+                                                                  //EventBus.getDefault().post(new UiModificationEvent(true));
                                                               }
-                                                              OrderProductsModel orderProductsModel = new OrderProductsModel();
-                                                              orderProductsModel.setProductId(item.getProductId());
-                                                              orderProductsModel.setName(item.getName());
-                                                              orderProductsModel.setQuantity(quantity);
-                                                              orderProductsModel.setTradePrice(item.getTradePrice());
-                                                              orderProductsModel.setAmount(item.getTradePrice() * quantity);
-                                                              orderProductsModel.setMRP(item.getMRP());
-                                                              EventBus.getDefault().post(orderProductsModel);
-                                                              cbItem.setChecked(true);
-                                                              //EventBus.getDefault().post(new UiModificationEvent(true));
+                                                              Toast.makeText(context, "Enter QTY " + etQTY.getText().toString(), Toast.LENGTH_SHORT).show();
                                                           }
-                                                          Toast.makeText(context, "Enter QTY " + etQTY.getText().toString(), Toast.LENGTH_SHORT).show();
-                                                      }
 
+                                                      }
                                                   }
-                                              }
-            );
+                );
+            }
         }
     }
 }

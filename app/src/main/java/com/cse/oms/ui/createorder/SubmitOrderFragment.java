@@ -211,9 +211,8 @@ public class SubmitOrderFragment extends Fragment {
                 List<String> CustomerResponseList = new ArrayList<>();
                 CustomerResponseList.add(0, "select");
                 for (int i = 1; i < body.size(); i++) {
-                    CustomerResponseList.add(i, body.get(i).getName() + "\n Address:" + body.get(i).getAddress());
+                    CustomerResponseList.add(i, body.get(i).getName() + "\n (" + body.get(i).getCustomerId() + ")\nAddress:" + body.get(i).getAddress() + "\n\n");
                 }
-
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, CustomerResponseList);
                 listView.setAdapter(adapter);
                 editText.addTextChangedListener(new TextWatcher() {
@@ -258,7 +257,7 @@ public class SubmitOrderFragment extends Fragment {
 
     public String getCustomerIdFromName(String name) {
         for (CustomerResponse customerModel : customers) {
-            if ((customerModel.getName() + "\n Address:" + customerModel.getAddress()).equalsIgnoreCase(name))
+            if ((customerModel.getName() + "\n (" + customerModel.getCustomerId() + ")\nAddress:" + customerModel.getAddress() + "\n\n").equalsIgnoreCase(name))
                 return customerModel.getCustomerId();
 
         }
@@ -620,7 +619,7 @@ public class SubmitOrderFragment extends Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onProductUpdate(OrderProductsModel productsModel) {
-        Productlist();
+        // Productlist();
 
     }
 
