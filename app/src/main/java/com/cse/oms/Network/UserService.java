@@ -1,6 +1,6 @@
 package com.cse.oms.Network;
 
-import com.cse.oms.Network.OrderInfo.OrderBaicInfoResponse;
+import com.cse.oms.ui.createorder.model.OrderInfo.OrderBaicInfoResponse;
 import com.cse.oms.ui.createorder.model.OrderProductsModel;
 import com.cse.oms.ui.createorder.model.SubmitOrder;
 import com.cse.oms.ui.createorder.model.SubmitOrderResponce;

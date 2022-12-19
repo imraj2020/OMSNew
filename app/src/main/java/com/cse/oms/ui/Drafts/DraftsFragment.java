@@ -28,8 +28,6 @@ import com.cse.oms.CreateOrderRoomDatabase.models.DraftProductModel;
 import com.cse.oms.LoginResRoomDb.LoginResInfo;
 import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
 import com.cse.oms.Network.ApiClient;
-import com.cse.oms.Network.OrderInfo.OrderBaicInfoResponse;
-import com.cse.oms.Network.OrderInfo.OrderItem;
 import com.cse.oms.databinding.DraftsFragmentBinding;
 import com.cse.oms.ui.createorder.Adapter.AddedProductAdapter;
 import com.cse.oms.ui.createorder.Adapter.DraftAdapter;
@@ -39,6 +37,8 @@ import com.cse.oms.ui.createorder.MessageEvent;
 import com.cse.oms.ui.createorder.UiModificationEvent;
 import com.cse.oms.ui.createorder.Utils.Constants;
 import com.cse.oms.ui.createorder.Utils.Utilities;
+import com.cse.oms.ui.createorder.model.OrderInfo.OrderBaicInfoResponse;
+import com.cse.oms.ui.createorder.model.OrderInfo.OrderItem;
 import com.cse.oms.ui.createorder.model.OrderProductsModel;
 import com.cse.oms.ui.createorder.model.ShowDraftOrder;
 import com.cse.oms.ui.createorder.model.SubmitOrder;
@@ -287,7 +287,9 @@ public class DraftsFragment extends Fragment {
                     productsModel.setProductId(draftProductModel.getProductId());
                     productsModel.setName(draftProductModel.getName());
                     productsModel.setQuantity(draftProductModel.getQuantity());
+                    productsModel.setUnitPrice(draftProductModel.getUnitPrice());
                     productsModel.setAmount(draftProductModel.getAmount());
+                    productsModel.setStatus(draftProductModel.getStatus());
                     addedProducts.add(productsModel);
                 }
 

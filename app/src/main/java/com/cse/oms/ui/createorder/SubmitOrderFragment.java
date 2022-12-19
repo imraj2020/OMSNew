@@ -39,8 +39,6 @@ import com.cse.oms.LoginResRoomDb.LoginResInfo;
 import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
 import com.cse.oms.Network.ApiClient;
 import com.cse.oms.Network.CustomerResponse;
-import com.cse.oms.Network.OrderInfo.OrderBaicInfoResponse;
-import com.cse.oms.Network.OrderInfo.OrderItem;
 import com.cse.oms.R;
 import com.cse.oms.databinding.FragmentSubmitOrderBinding;
 import com.cse.oms.ui.createorder.Adapter.AddedProductAdapter;
@@ -48,6 +46,8 @@ import com.cse.oms.ui.createorder.Adapter.POProductAdapter;
 import com.cse.oms.ui.createorder.Adapter.SaleProductAdapter;
 import com.cse.oms.ui.createorder.Utils.Constants;
 import com.cse.oms.ui.createorder.Utils.Utilities;
+import com.cse.oms.ui.createorder.model.OrderInfo.OrderBaicInfoResponse;
+import com.cse.oms.ui.createorder.model.OrderInfo.OrderItem;
 import com.cse.oms.ui.createorder.model.OrderProductsModel;
 import com.cse.oms.ui.createorder.model.SubmitOrder;
 import com.cse.oms.ui.createorder.model.SubmitOrderResponce;
@@ -316,6 +316,8 @@ public class SubmitOrderFragment extends Fragment {
                     draftProductModel.setOrderId((int) orderID);
                     draftProductModel.setAmount(addedProducts.get(i).getAmount());
                     draftProductModel.setQuantity(addedProducts.get(i).getQuantity());
+                    draftProductModel.setUnitPrice(addedProducts.get(i).getTradePrice());
+                    draftProductModel.setStatus(0);
                     orderDatabase.daoAccess().insertProduct(draftProductModel);
                 }
                 getActivity().runOnUiThread(new Runnable() {

@@ -1,5 +1,5 @@
 
-package com.cse.oms.Network.OrderInfo;
+package com.cse.oms.ui.createorder.model.OrderInfo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

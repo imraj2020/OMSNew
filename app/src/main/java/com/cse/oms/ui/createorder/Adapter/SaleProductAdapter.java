@@ -1,6 +1,7 @@
 package com.cse.oms.ui.createorder.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse.oms.R;
@@ -42,6 +44,11 @@ public class SaleProductAdapter extends RecyclerView.Adapter<SaleProductAdapter.
     public void onBindViewHolder(SaleProductViewHolder holder, int position) {
         OrderProductsModel item = items.get(position);
         holder.set(item);
+        if (holder.getLayoutPosition() % 2 == 0) {
+            holder.rootLayout.setCardBackgroundColor(Color.parseColor("#ffffff"));
+        } else {
+            holder.rootLayout.setCardBackgroundColor(Color.parseColor("#86C8BC"));
+        }
     }
 
     @Override
@@ -61,6 +68,7 @@ public class SaleProductAdapter extends RecyclerView.Adapter<SaleProductAdapter.
         ImageView ivRemove;
         ImageView ivAdd;
         CheckBox cbItem;
+        CardView rootLayout;
 
         public SaleProductViewHolder(View itemView) {
             super(itemView);
@@ -73,10 +81,12 @@ public class SaleProductAdapter extends RecyclerView.Adapter<SaleProductAdapter.
             ivRemove = itemView.findViewById(R.id.ivRemove);
             ivAdd = itemView.findViewById(R.id.ivAdd);
             cbItem = itemView.findViewById(R.id.cbItem);
+            rootLayout = itemView.findViewById(R.id.rootLayout);
             this.setIsRecyclable(false);
         }
 
         public void set(final OrderProductsModel item) {
+
             //UI setting code
             tvProductName.setText(item.getName());
             tvPackSize.setText("PackSize: " + item.getPackSize() + "|" + " Price: " + item.getTradePrice());

@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cse.oms.Network.OrderInfo.OrderItem;
 import com.cse.oms.R;
 import com.cse.oms.ui.createorder.MessageEvent;
+import com.cse.oms.ui.createorder.model.OrderInfo.OrderItem;
 
 import org.greenrobot.eventbus.EventBus;
 

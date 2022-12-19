@@ -17,6 +17,8 @@ public class DraftProductModel {
     private double quantity;
     private double amount;
     private int orderId;
+    private int status;
+    private double unitPrice;
 
     public int getId() {
         return id;
@@ -72,5 +74,21 @@ public class DraftProductModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }
