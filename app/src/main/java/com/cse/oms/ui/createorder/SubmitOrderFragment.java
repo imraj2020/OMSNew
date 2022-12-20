@@ -187,6 +187,7 @@ public class SubmitOrderFragment extends Fragment {
             }
         });
     }
+
     public void addSpinnerData(final List<CustomerResponse> body) {
         binding.tvCustomerList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -278,7 +279,7 @@ public class SubmitOrderFragment extends Fragment {
                     productsModels.clear();
                     productsModels.addAll(response.body());
                     saleProductAdapter.notifyDataSetChanged();
-                   // Toast.makeText(getContext(), "response.body()", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getContext(), "response.body()", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -489,7 +490,7 @@ public class SubmitOrderFragment extends Fragment {
 
     }
 
-
+    //update product price
     private void updateTotal() {
         double total = 0;
         for (int i = 0; i < addedProducts.size(); i++) {
