@@ -288,6 +288,7 @@ public class DraftsFragment extends Fragment {
                     productsModel.setName(draftProductModel.getName());
                     productsModel.setQuantity(draftProductModel.getQuantity());
                     productsModel.setUnitPrice(draftProductModel.getUnitPrice());
+                    productsModel.setTradePrice(draftProductModel.getUnitPrice());
                     productsModel.setAmount(draftProductModel.getAmount());
                     productsModel.setStatus(draftProductModel.getStatus());
                     addedProducts.add(productsModel);
