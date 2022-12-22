@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,7 +34,8 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
     private CustomerListViewModel mViewModel;
     CustomerListFragmentBinding binding;
     RecyclerView CustomerList;
-    List<CustomerListInfo> arrayList;
+    List<CustomerListInfo> arrayList= new ArrayList<>();
+    SearchView MySearch;
 
 
     public static CustomerListFragment newInstance() {
@@ -46,8 +48,42 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
         binding = CustomerListFragmentBinding.inflate(inflater);
         CustomerList = binding.myRecycleview;
 
+        MySearch = binding.searchviews;
 
-        arrayList = new ArrayList<>();
+
+
+
+
+        MySearch.clearFocus();
+
+        MySearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                //testing
+                CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
+                arrayList = db.customerListDAO().getAllCustomer();
+                CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext(),this::selectedUser);
+                CustomerList.setLayoutManager(new LinearLayoutManager(requireContext()));
+                CustomerList.setAdapter(adapter);
+
+                //end test
+                adapter.getFilter().filter(newText);
+
+                String searchstr = newText;
+                return false;
+            }
+
+            private void selectedUser(CustomerListInfo customerListInfo) {
+                String Customerid= customerListInfo.getCustomerid();
+                Toast.makeText(requireContext(),customerListInfo.getCustomerid()+" Selected",Toast.LENGTH_LONG).show();
+            }
+        });
 
 
         Customerlist();
@@ -123,5 +159,6 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
     @Override
     public void selectedUser(CustomerListInfo customerListInfo) {
 
+        Toast.makeText(requireContext(),customerListInfo.getCustomerid()+" Selected",Toast.LENGTH_LONG).show();
     }
 }

@@ -35,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderCollectionFragment extends Fragment implements CustomerListAdapter.UserClickListener {
+public class OrderCollectionFragment extends Fragment {
 
     private OrderCollectionViewModel mViewModel;
     OrderCollectionFragmentBinding binding;
@@ -52,8 +52,7 @@ public class OrderCollectionFragment extends Fragment implements CustomerListAda
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = OrderCollectionFragmentBinding.inflate(inflater);
-        CustomerList = binding.myRecycleviews;
-        MySearch = binding.searchview;
+
 
 
         //testing
@@ -64,38 +63,10 @@ public class OrderCollectionFragment extends Fragment implements CustomerListAda
        // arrayList = new ArrayList<>();
 
 
-        MySearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                //testing
-                CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
-                arrayList = db.customerListDAO().getAllCustomer();
-                CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext(),this::selectedUser);
-                CustomerList.setLayoutManager(new LinearLayoutManager(requireContext()));
-                CustomerList.setAdapter(adapter);
-
-                //end test
-                adapter.getFilter().filter(newText);
-
-                String searchstr = newText;
-                return false;
-            }
-
-            private void selectedUser(CustomerListInfo customerListInfo) {
-                String Customerid= customerListInfo.getCustomerid();
-                Toast.makeText(requireContext(),customerListInfo.getCustomerid()+" Selected",Toast.LENGTH_LONG).show();
-            }
-        });
 
 
-        Customerlist();
-        loaddatainlistview();
+
+
 
 
 
@@ -105,59 +76,10 @@ public class OrderCollectionFragment extends Fragment implements CustomerListAda
     }
 
 
-    public void loaddatainlistview() {
-        CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
-        arrayList = db.customerListDAO().getAllCustomer();
-        CustomerListAdapter adapter = new CustomerListAdapter(arrayList, requireContext(),this::selectedUser);
-        CustomerList.setLayoutManager(new LinearLayoutManager(requireContext()));
-        CustomerList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
-
-
-    public void Customerlist() {
-
-        Intent intent = getActivity().getIntent();
-        int tid = intent.getIntExtra("TerritoryId", 0);
-        int Scid = intent.getIntExtra("SalesLineId", 0);
-        Call<List<CustomerResponse>> call = ApiClient.getUserService().getAllCustomer(tid, Scid);
 
 
 
-        call.enqueue(new Callback<List<CustomerResponse>>() {
-            @Override
-            public void onResponse(Call<List<CustomerResponse>> call, Response<List<CustomerResponse>> response) {
 
-                if (response.isSuccessful()) {
-
-                    List<CustomerResponse> nlist = response.body();
-
-
-                    for (CustomerResponse post : nlist) {
-                        try {
-                            CustomerListRoomDB db = CustomerListRoomDB.getDbInstance(requireContext());
-                            CustomerListInfo customerListInfo = new CustomerListInfo(post.getTerritoryId(),
-                                    post.getTerritoryName(), post.getSCId(), post.getDepotName(), post.getCustomerId(),
-                                    post.getName(), post.getAddress());
-                            db.customerListDAO().insertCustomerList(customerListInfo);
-                        } catch (Exception e) {
-
-                        }
-
-
-                    }
-                    loaddatainlistview();
-                } else {
-                    Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<CustomerResponse>> call, Throwable t) {
-                Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -166,9 +88,5 @@ public class OrderCollectionFragment extends Fragment implements CustomerListAda
         // TODO: Use the ViewModel
     }
 
-    @Override
-    public void selectedUser(CustomerListInfo customerListInfo) {
 
-        Toast.makeText(requireContext(),customerListInfo.getCustomerid()+" Selected",Toast.LENGTH_LONG).show();
-    }
 }

@@ -6,38 +6,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.OrderCollection.OrderCollectionFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
 
 
-        <androidx.appcompat.widget.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layoutDirection="rtl"
-            android:id="@+id/searchview"
-            app:queryHint="Search Here"
-            android:layout_margin="10dp">
+<!--        <androidx.appcompat.widget.SearchView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layoutDirection="rtl"-->
+<!--            android:id="@+id/searchview"-->
+<!--            app:queryHint="Search Here"-->
+<!--            android:layout_margin="10dp">-->
 
-        </androidx.appcompat.widget.SearchView>
-
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="215dp">
+<!--        </androidx.appcompat.widget.SearchView>-->
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/myRecycleviews"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:ignore="TouchTargetSizeCheck" />
-        </ScrollView>
-    </LinearLayout>
+<!--        <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            tools:ignore="MissingConstraints"-->
+<!--            tools:layout_editor_absoluteX="-16dp"-->
+<!--            tools:layout_editor_absoluteY="215dp">-->
+
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/myRecycleviews"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                tools:ignore="TouchTargetSizeCheck" />-->
+<!--        </ScrollView>-->
+<!--    </LinearLayout>-->
 </LinearLayout>
 
 
