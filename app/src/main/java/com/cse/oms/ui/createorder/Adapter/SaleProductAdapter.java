@@ -21,11 +21,12 @@ import com.cse.oms.ui.createorder.model.OrderProductsModel;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaleProductAdapter extends RecyclerView.Adapter<SaleProductAdapter.SaleProductViewHolder> {
     private final Context context;
-    private final List<OrderProductsModel> items;
+    private List<OrderProductsModel> items;
 
     public SaleProductAdapter(List<OrderProductsModel> items, Context context) {
         this.items = items;
@@ -57,6 +58,16 @@ public class SaleProductAdapter extends RecyclerView.Adapter<SaleProductAdapter.
             return 0;
         }
         return items.size();
+    }
+
+    // method for filtering our recyclerview items.
+    public void filterList(ArrayList<OrderProductsModel> filterlist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        items = filterlist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
     }
 
     public class SaleProductViewHolder extends RecyclerView.ViewHolder {

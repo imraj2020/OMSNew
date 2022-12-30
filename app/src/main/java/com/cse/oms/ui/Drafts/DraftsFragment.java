@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
@@ -106,6 +107,7 @@ public class DraftsFragment extends Fragment {
         showDraftOrders();
         Onclick();
         Productlist();
+        SearchProduct();
         return binding.getRoot();
 
     }
@@ -208,6 +210,51 @@ public class DraftsFragment extends Fragment {
                 Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public boolean SearchProduct() {
+        // getting search view of our item.\
+
+        // below line is to call set on query text listener method.
+        binding.actionSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    private void filter(String text) {
+        // creating a new array list to filter our data.
+        ArrayList<OrderProductsModel> filteredlist = new ArrayList<OrderProductsModel>();
+
+        // running a for loop to compare elements.
+        for (OrderProductsModel item : productsModels) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredlist.add(item);
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(getContext(), "No Data Found..", Toast.LENGTH_SHORT).show();
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            saleProductAdapter.filterList(filteredlist);
+        }
     }
 
     private void updateTotal() {
@@ -458,7 +505,7 @@ public class DraftsFragment extends Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onProductUpdate(OrderProductsModel productsModel) {
-        Productlist();
+        // Productlist();
 
     }
 
