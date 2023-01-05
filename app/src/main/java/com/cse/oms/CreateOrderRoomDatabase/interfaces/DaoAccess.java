@@ -34,7 +34,7 @@ public interface DaoAccess {
     void updateOrder(DraftOrderModel movies);
 
     @Delete
-    void deleteOrder(DraftOrderModel movies);
+    void delete(DraftOrderModel model);
 
 
     // Draft Products

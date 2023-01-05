@@ -15,6 +15,7 @@ import com.cse.oms.CreateOrderRoomDatabase.models.DraftOrderModel;
 import com.cse.oms.R;
 import com.cse.oms.ui.createorder.MessageEvent;
 import com.cse.oms.ui.createorder.Utils.Constants;
+import com.cse.oms.ui.createorder.Utils.Utilities;
 import com.cse.oms.ui.createorder.model.ShowDraftOrder;
 
 import org.greenrobot.eventbus.EventBus;
@@ -85,13 +86,19 @@ public class DraftAdapter extends RecyclerView.Adapter<DraftAdapter.DraftViewHol
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            orderDatabase.daoAccess().deleteOrder(item);
+                            try {
+
+                                orderDatabase.daoAccess().delete(item);
+                            } catch (Exception e) {
+                                Utilities.showLogcatMessage(e.getMessage());
+                            }
                             ShowDraftOrder showDraftOrder = new ShowDraftOrder();
                             showDraftOrder.setDraftOrderModel(item);
                             showDraftOrder.setDelete(true);
                             EventBus.getDefault().post(showDraftOrder);
                         }
                     }).start();
+                    //Toast.makeText(context.getApplicationContext(), "This Item is Deleted", Toast.LENGTH_SHORT).show();
 
                     orderDatabase.close();
                 }

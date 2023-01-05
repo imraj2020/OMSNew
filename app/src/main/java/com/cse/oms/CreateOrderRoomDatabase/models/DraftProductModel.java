@@ -1,13 +1,16 @@
 package com.cse.oms.CreateOrderRoomDatabase.models;
 
 
+import static androidx.room.ForeignKey.CASCADE;
+
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity(foreignKeys = @ForeignKey(entity = DraftOrderModel.class,
         parentColumns = "id",
-        childColumns = "orderId"))
+        childColumns = "orderId",
+        onDelete = CASCADE))
 public class DraftProductModel {
     @PrimaryKey(autoGenerate = true)
     private int id;
