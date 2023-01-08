@@ -3,7 +3,6 @@ package com.cse.oms.CreateOrderRoomDatabase.models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 @Entity
 public class DraftOrderModel {
     @PrimaryKey(autoGenerate = true)
