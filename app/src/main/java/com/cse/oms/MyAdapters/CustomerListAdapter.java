@@ -1,19 +1,28 @@
 package com.cse.oms.MyAdapters;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse.oms.CustomerListRoomDb.CustomerListInfo;
 import com.cse.oms.ProductListRoomDb.ProductListInfo;
 import com.cse.oms.R;
+import com.cse.oms.ui.CustomerList.CustomerListFragment;
+import com.cse.oms.ui.createorder.model.OrderProductsModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +61,21 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CustomerListInfo data = userModelList.get(position);
 
-        holder.TerritoryId.setText("TerritoryId: " + Integer.toString(data.getTerritoryid()));
-        holder.TerritoryName.setText("TerritoryName: " + data.getTerritoryname());
-        holder.SCId.setText("SCId: " + data.getScid());
-        holder.DepotName.setText("DepotName: " + data.getDepotname());
-        holder.CustomerId.setText("CustomerId: " + data.getCustomerid());
+
+//        if (holder.getLayoutPosition() % 2 == 0) {
+//            holder.rootLayout.setCardBackgroundColor(Color.parseColor("#ffffff"));
+//        } else {
+//            holder.rootLayout.setCardBackgroundColor(Color.parseColor("#86C8BC"));
+//        }
+
+
+       // holder.TerritoryId.setText("TerritoryId: " + Integer.toString(data.getTerritoryid()));
+       // holder.TerritoryName.setText("TerritoryName: " + data.getTerritoryname());
+       // holder.SCId.setText("SCId: " + data.getScid());
+
         holder.Name.setText("Name: " + data.getName());
+        holder.CustomerId.setText("CustomerId: " + data.getCustomerid());
+        holder.DepotName.setText("DepotName: " + data.getDepotname());
         holder.Address.setText("Address: " + data.getAddress() + "\n");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -70,8 +88,17 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
 
     @Override
     public int getItemCount() {
+        int x = userModelList.size();
+        SharedPreferences prefs = context.getSharedPreferences("my_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putInt("size", x );
+        edit.commit();
+
+
+
 
         //list.size
+      //  Toast.makeText(context,x+" Size",Toast.LENGTH_LONG).show();
         return userModelList.size();
     }
 
@@ -115,17 +142,16 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView TerritoryId, TerritoryName, SCId, DepotName, CustomerId, Name, Address;
-
+        CardView rootLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            TerritoryId = (TextView) itemView.findViewById(R.id.tvs_TerritoryId);
-            TerritoryName = (TextView) itemView.findViewById(R.id.tvs_TerritoryName);
-            SCId = (TextView) itemView.findViewById(R.id.tvs_SCId);
-            DepotName = (TextView) itemView.findViewById(R.id.tvs_DepotName);
-            CustomerId = (TextView) itemView.findViewById(R.id.tvs_CustomerId);
+
             Name = (TextView) itemView.findViewById(R.id.tvs_Name);
+            CustomerId = (TextView) itemView.findViewById(R.id.tvs_CustomerId);
+            DepotName = (TextView) itemView.findViewById(R.id.tvs_DepotName);
             Address = (TextView) itemView.findViewById(R.id.tvs_Address);
+            //rootLayout = itemView.findViewById(R.id.rootLayout1);
 
         }
     }

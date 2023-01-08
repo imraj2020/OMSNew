@@ -55,12 +55,7 @@ public class OrderCollectionFragment extends Fragment {
 
 
 
-        //testing
 
-
-
-        MySearch.clearFocus();
-       // arrayList = new ArrayList<>();
 
 
 

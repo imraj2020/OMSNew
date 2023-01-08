@@ -5,66 +5,54 @@
     android:padding="5dp">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner_border_top"
         android:backgroundTint="#039BE5"
-        android:padding="5dp"
-        android:id="@+id/linear"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="5dp">
+
+
+
 
         <TextView
+            android:id="@+id/tvs_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="holidayid"
-            android:id="@+id/tvs_TerritoryId"/>
+            android:text="Name"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tvs_CustomerId"
+            android:layout_width="wrap_content"
+            android:paddingRight="5dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="companyid"
-            android:id="@+id/tvs_TerritoryName"/>
+            android:text="CustomerId"
+            android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/tvs_DepotName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="holidayname"
-            android:id="@+id/tvs_SCId"/>
+            android:text="DepotName"
+            android:textColor="@color/black" />
 
+        </LinearLayout>
         <TextView
+            android:id="@+id/tvs_Address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="shortname"
-            android:id="@+id/tvs_DepotName"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="religionspecific"
-            android:id="@+id/tvs_CustomerId"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="religionid"
-            android:id="@+id/tvs_Name"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="religionname"
-            android:id="@+id/tvs_Address"/>
+            android:text="Address"
+            android:textColor="@color/black" />
 
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

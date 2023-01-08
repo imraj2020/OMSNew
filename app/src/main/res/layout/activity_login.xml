@@ -57,8 +57,10 @@
                     style="@style/modifiedEditText"
                     android:hint="User Id"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:text="U21080273" />
+                    android:maxLines="1" />
+
+
+<!--                android:text="U21080273"-->
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -71,8 +73,8 @@
                     style="@style/modifiedEditText"
                     android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:text="123456" />
+                    android:maxLines="1"/>
+<!--                android:text="123456"-->
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

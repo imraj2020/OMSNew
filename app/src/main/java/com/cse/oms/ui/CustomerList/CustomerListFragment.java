@@ -1,10 +1,14 @@
 package com.cse.oms.ui.CustomerList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +40,7 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
     RecyclerView CustomerList;
     List<CustomerListInfo> arrayList= new ArrayList<>();
     SearchView MySearch;
+    TextView TCustomer;
 
 
     public static CustomerListFragment newInstance() {
@@ -49,9 +54,15 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
         CustomerList = binding.myRecycleview;
 
         MySearch = binding.searchviews;
+        TCustomer = binding.totalcustomer;
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("my_prefs", MODE_PRIVATE);
+
+        int size = prefs.getInt("size", 0);
 
 
 
+        TCustomer.setText(Integer.toString(size));
 
 
         MySearch.clearFocus();

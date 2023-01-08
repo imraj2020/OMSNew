@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.CustomerList.CustomerListFragment">
 
     <LinearLayout
@@ -13,28 +13,58 @@
 
 
         <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchviews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layoutDirection="rtl"
-            android:id="@+id/searchviews"
-            app:queryHint="Search Here"
-            android:layout_margin="10dp">
+            app:queryHint="Search Here">
 
         </androidx.appcompat.widget.SearchView>
 
-        <ScrollView
+        <!--        <ScrollView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            tools:ignore="MissingConstraints"-->
+        <!--            tools:layout_editor_absoluteX="-16dp"-->
+        <!--            tools:layout_editor_absoluteY="215dp">-->
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/myRecycleview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="215dp">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:ignore="TouchTargetSizeCheck" />
+        <!--        </ScrollView>-->
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/myRecycleview"
-                android:layout_width="match_parent"
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="TouchTargetSizeCheck" />
-        </ScrollView>
+                android:layout_gravity="bottom|center_horizontal"
+                android:text="Total Customer: "
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/totalcustomer"
+                android:layout_gravity="bottom|center_horizontal"
+                android:text="@string/app_name"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
     </LinearLayout>
 </LinearLayout>
