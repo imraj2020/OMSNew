@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mycardview"
+    app:cardCornerRadius="20dp"
+    android:layout_margin="5dp">
 
     <LinearLayout
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/spinner_border_top"
-        android:backgroundTint="#039BE5"
+
         android:orientation="vertical"
         android:padding="5dp">
 
@@ -55,4 +57,4 @@
     </LinearLayout>
 
 
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

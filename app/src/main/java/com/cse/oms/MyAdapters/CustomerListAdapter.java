@@ -2,6 +2,7 @@ package com.cse.oms.MyAdapters;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -57,16 +58,19 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.customer_list_customlv, parent, false));
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CustomerListInfo data = userModelList.get(position);
 
 
-//        if (holder.getLayoutPosition() % 2 == 0) {
-//            holder.rootLayout.setCardBackgroundColor(Color.parseColor("#ffffff"));
-//        } else {
-//            holder.rootLayout.setCardBackgroundColor(Color.parseColor("#86C8BC"));
-//        }
+
+
+        if (holder.getLayoutPosition() % 2 == 0) {
+            holder.MyCardView.setCardBackgroundColor(Color.parseColor("#039BE5"));
+        } else {
+            holder.MyCardView.setCardBackgroundColor(Color.parseColor("#86C8BC"));
+        }
 
 
        // holder.TerritoryId.setText("TerritoryId: " + Integer.toString(data.getTerritoryid()));
@@ -142,7 +146,7 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView TerritoryId, TerritoryName, SCId, DepotName, CustomerId, Name, Address;
-        CardView rootLayout;
+        CardView MyCardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -151,6 +155,7 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
             CustomerId = (TextView) itemView.findViewById(R.id.tvs_CustomerId);
             DepotName = (TextView) itemView.findViewById(R.id.tvs_DepotName);
             Address = (TextView) itemView.findViewById(R.id.tvs_Address);
+            MyCardView = itemView.findViewById(R.id.mycardview);
             //rootLayout = itemView.findViewById(R.id.rootLayout1);
 
         }
