@@ -1,9 +1,12 @@
 package com.cse.oms.ui.ProductList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -45,6 +48,7 @@ public class ProductListFragment extends Fragment {
     RecyclerView ProductList;
     List<ProductListInfo> arrayList= new ArrayList<>();
     SearchView MySearch;
+    TextView Tproduct;
 
 
     public static ProductListFragment newInstance() {
@@ -57,6 +61,15 @@ public class ProductListFragment extends Fragment {
         binding = ProductListFragmentBinding.inflate(inflater);
         ProductList = binding.mylistview;
         MySearch = binding.productsearch;
+        Tproduct = binding.totalproduct;
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("my_prefes", MODE_PRIVATE);
+
+        int size = prefs.getInt("psize", 0);
+
+
+
+        Tproduct.setText(Integer.toString(size));
 
 
 

@@ -1,6 +1,10 @@
 package com.cse.oms.MyAdapters;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cse.oms.CustomerListRoomDb.CustomerListInfo;
@@ -48,23 +53,22 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProductListInfo data = userModelList.get(position);
 
-        holder.ProductId.setText("ProductId: "+Integer.toString(data.getProductid()));
-        holder.ProductCode.setText("ProductCode: "+data.getProductcode());
+
+        if (holder.getLayoutPosition() % 2 == 0) {
+            holder.MyCardView.setCardBackgroundColor(Color.parseColor("#039BE5"));
+        } else {
+            holder.MyCardView.setCardBackgroundColor(Color.parseColor("#86C8BC"));
+        }
+
+
+        //changes
         holder.Name.setText("Name: "+data.getName());
-        holder.Description.setText("Description: "+data.getDescription());
-        holder.TradePrice.setText("TradePrice: "+Float.toString(data.getTradeprice()));
-        holder.ProductStrength.setText("ProductStrength: "+Integer.toString(data.getProductstrength()));
-        holder.PackSize.setText("PackSize: "+Float.toString(data.getPacksize()));
-        holder.ProductFamilyId.setText("ProductFamilyId: "+Integer.toString(data.getProductfamilyid()));
-        holder.ProductFamilyName.setText("ProductFamilyName: "+data.getProductfamilyname());
+        holder.ProductCode.setText("ProductCode: "+data.getProductcode());
         holder.ProductCategory.setText("ProductCategory: "+data.getProductcategory());
-        holder.COGS.setText("COGS: "+Float.toString(data.getCogs()));
-        holder.MRP.setText("MRP: "+Float.toString(data.getMrp()));
-        holder.Vat.setText("Vat: "+Float.toString(data.getVat()));
-        holder.VatUnit.setText("VatUnit: "+Float.toString(data.getVatunit()));
-        holder.Discounted.setText("Discounted: "+Float.toString(data.getDiscounted()));
-        holder.TPUnit.setText("TPUnit: "+Float.toString(data.getTpunit()));
-        holder.ColdChangeProduct.setText("ColdChangeProduct: "+Integer.toString(data.getColdchangeproduct())+"\n");
+        holder.TradePrice.setText("TradePrice: "+Float.toString(data.getTradeprice()));
+        holder.PackSize.setText("PackSize: "+Float.toString(data.getPacksize()));
+
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +80,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public int getItemCount() {
+
+        int product = userModelList.size();
+        SharedPreferences prefes = context.getSharedPreferences("my_prefes", MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefes.edit();
+        edit.putInt("psize", product);
+        edit.commit();
+
         return userModelList.size();
     }
 
@@ -117,29 +128,24 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView ProductId, ProductCode, Name,Description,TradePrice,ProductStrength,PackSize,
-                ProductFamilyId,ProductFamilyName,ProductCategory,COGS,MRP,Vat,VatUnit,Discounted,TPUnit,ColdChangeProduct;
+        TextView ProductCode, Name,TradePrice,PackSize,ProductCategory;
+        CardView MyCardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ProductId = (TextView)itemView.findViewById(R.id.tv_ProductId);
-            ProductCode = (TextView)itemView.findViewById(R.id.tv_ProductCode);
+
+
             Name = (TextView)itemView.findViewById(R.id.tv_Name);
-            Description = (TextView)itemView.findViewById(R.id.tv_Description);
-            TradePrice = (TextView)itemView.findViewById(R.id.tv_TradePrice);
-            ProductStrength = (TextView)itemView.findViewById(R.id.tv_ProductStrength);
-            PackSize = (TextView)itemView.findViewById(R.id.tv_PackSize);
-            ProductFamilyId = (TextView)itemView.findViewById(R.id.tv_ProductFamilyId);
-            ProductFamilyName = (TextView)itemView.findViewById(R.id.tv_ProductFamilyName);
+            ProductCode = (TextView)itemView.findViewById(R.id.tv_ProductCode);
             ProductCategory = (TextView)itemView.findViewById(R.id.tv_ProductCategory);
-            COGS = (TextView)itemView.findViewById(R.id.tv_COGS);
-            MRP =(TextView)itemView.findViewById(R.id.tv_MRP);
-            Vat = (TextView)itemView.findViewById(R.id.tv_Vat);
-            VatUnit = (TextView)itemView.findViewById(R.id.tv_VatUnit);
-            Discounted = (TextView)itemView.findViewById(R.id.tv_Discounted);
-            TPUnit =(TextView)itemView.findViewById(R.id.tv_TPUnit);
-            ColdChangeProduct =(TextView)itemView.findViewById(R.id.tv_ColdChangeProduct);
+            TradePrice = (TextView)itemView.findViewById(R.id.tv_TradePrice);
+            PackSize = (TextView)itemView.findViewById(R.id.tv_PackSize);
+
+            MyCardView = itemView.findViewById(R.id.productcardview);
+
+
+
         }
     }
 }

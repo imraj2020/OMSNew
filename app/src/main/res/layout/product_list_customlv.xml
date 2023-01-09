@@ -1,142 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/productcardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:layout_margin="5dp"
+    app:cardCornerRadius="20dp">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/spinner_border_top"
-        android:backgroundTint="#039BE5"
-        android:padding="5dp"
-        android:id="@+id/linear"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="holidayid"
-            android:id="@+id/tv_ProductId"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="companyid"
-            android:id="@+id/tv_ProductCode"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="holidayname"
-            android:id="@+id/tv_Name"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="shortname"
-            android:id="@+id/tv_Description"/>
+        android:orientation="vertical"
+        android:padding="5dp">
 
 
         <TextView
+            android:id="@+id/tv_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="religionspecific"
-            android:id="@+id/tv_TradePrice"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="religionid"
-            android:id="@+id/tv_ProductStrength"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="religionname"
-            android:id="@+id/tv_PackSize"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="typeid"
-            android:id="@+id/tv_ProductFamilyId"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="typename"
-            android:id="@+id/tv_ProductFamilyName"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="description"
-            android:id="@+id/tv_ProductCategory"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="active"
-            android:id="@+id/tv_COGS"/>
+            android:text="name"
+            android:textColor="@color/black" />
 
 
         <TextView
+            android:id="@+id/tv_ProductCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="everyyearsamemonthday"
-            android:id="@+id/tv_MRP"/>
+            android:text="ProductCode"
+            android:textColor="@color/black" />
 
 
         <TextView
+            android:id="@+id/tv_ProductCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="typeid"
-            android:id="@+id/tv_Vat"/>
+            android:text="ProductCategory"
+            android:textColor="@color/black" />
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="typename"
-            android:id="@+id/tv_VatUnit"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="description"
-            android:id="@+id/tv_Discounted"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="active"
-            android:id="@+id/tv_TPUnit"/>
+            <TextView
+                android:id="@+id/tv_TradePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="5dp"
+                android:text="TradePrice"
+                android:textColor="@color/black" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="everyyearsamemonthday"
-            android:id="@+id/tv_ColdChangeProduct"/>
+            <TextView
+                android:id="@+id/tv_PackSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PackSize"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-
-
-</RelativeLayout>
+</androidx.cardview.widget.CardView>
