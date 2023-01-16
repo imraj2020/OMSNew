@@ -75,4 +75,10 @@ public class LoginDbHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+
+    public Cursor getNameData() {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT username FROM " + TABLE_NAME, null);
+        return cursor;
+    }
 }

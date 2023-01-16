@@ -52,4 +52,16 @@ public interface UserService {
     @POST("api/NewOrderApi/CreateNewOrder")
     Call<SubmitOrderResponce> SubmitOrder(@Body SubmitOrder submitOrder);
 
+
+
+    //Order Status
+
+    @GET("api/OrdersStatusCheckingAPI/GetOrdersStatus")
+    Call<List<OrderStatus>> ORDER_STATUS_CALL(@Query("EmpId") String EmpId,
+                                              @Query("OrderDate") String OrderDate,
+                                              @Query("DeliveryDate") String DeliveryDate,
+                                              @Query("CustomerId") String CustomerId
+
+    );
+
 }
