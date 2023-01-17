@@ -222,8 +222,8 @@ public class OrderStatusFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<OrderStatus>> call, Throwable t) {
-                Toast.makeText(requireContext(), "Throwable " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-
+//                Toast.makeText(requireContext(), "Throwable " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), "No Data Found !!! ", Toast.LENGTH_LONG).show();
             }
         });
 
