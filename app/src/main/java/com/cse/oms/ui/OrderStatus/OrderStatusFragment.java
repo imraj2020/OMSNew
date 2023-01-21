@@ -1,16 +1,21 @@
 package com.cse.oms.ui.OrderStatus;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +27,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cse.oms.MyAdapters.OrderStatusAdapter;
+import com.cse.oms.MyAdapters.ProductListAdapter;
 import com.cse.oms.Network.ApiClient;
 import com.cse.oms.Network.OrderStatus;
 import com.cse.oms.Network.Register;
+import com.cse.oms.ProductListRoomDb.ProductListRoomDB;
 import com.cse.oms.R;
 import com.cse.oms.View.LoginDbHelper;
 import com.cse.oms.databinding.OrderStatusFragmentBinding;
@@ -47,7 +55,9 @@ public class OrderStatusFragment extends Fragment {
     Button SearchButton, BackButton;
     String orderdate, deliverydate, customerid;
     ScrollView OrderScrollView;
-    TextView OrderDetails;
+    TextView TotalResult;
+    RecyclerView OrderDetail;
+    public static List<OrderStatus> nlist;
 
     public static OrderStatusFragment newInstance() {
         return new OrderStatusFragment();
@@ -64,7 +74,16 @@ public class OrderStatusFragment extends Fragment {
         SearchButton = binding.SearchButton;
         BackButton = binding.goback;
         OrderScrollView = binding.orderscroll;
-        OrderDetails = binding.tvorderdetails;
+        OrderDetail = binding.orderstatuslist;
+//        TotalResult = binding.totalresult;
+//
+//        SharedPreferences prefs = getActivity().getSharedPreferences("my_prefes", MODE_PRIVATE);
+//
+//        int size = prefs.getInt("totalR", 0);
+//
+//
+//
+//        TotalResult.setText(Integer.toString(size));
 
 
         // get the username
@@ -145,10 +164,10 @@ public class OrderStatusFragment extends Fragment {
             @Override
             public void onClick(View view) {
               //  Move one Fragment to another
-                FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-                ft.replace(R.id.nav_host_fragment_content_main, new OrderStatusFragment(), null);
-                ft.addToBackStack(OrderStatusFragment.class.getName()); // you can use a string here, using the class name is just convenient
-                ft.commit();
+//                FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+//                ft.replace(R.id.nav_host_fragment_content_main, new OrderStatusFragment(), null);
+//                ft.addToBackStack(OrderStatusFragment.class.getName()); // you can use a string here, using the class name is just convenient
+//                ft.commit();
 
 
                 binding.orderstatussrch.setVisibility(View.VISIBLE);
@@ -173,7 +192,7 @@ public class OrderStatusFragment extends Fragment {
     }
 
 
-    private void register() {
+    public void register() {
         orderdate = OrderDate.getText().toString();
         deliverydate = DeliveryDate.getText().toString();
         customerid = CustomerId.getText().toString();
@@ -185,32 +204,34 @@ public class OrderStatusFragment extends Fragment {
 
                 if (response.isSuccessful()) {
 
-                    List<OrderStatus> nlist = response.body();
+                    nlist = response.body();
+                    //public static List<NewOrderStatus> = nlist;
                     binding.orderstatussrch.setVisibility(View.GONE);
                     binding.orderstatusresult.setVisibility(View.VISIBLE);
-                    if(nlist.isEmpty()){
-                        Toast.makeText(requireContext(), " No Data Found ! ", Toast.LENGTH_LONG).show();
-                    }
+//                    if(nlist.isEmpty()){
+//                        Toast.makeText(requireContext(), " No Data Found ! ", Toast.LENGTH_LONG).show();
+//                    }
+//
+//                    for (OrderStatus post : nlist) {
+//                        String content = "";
+//                        content += "Order No: " + post.getOrderNo() + "\n";
+//                        content += "Customer Id: " + post.getCustomerId()+ "\n";
+//                        content += "Order Date: " + post.getOrderDate()+ "\n";
+//                        content += "Delivery Date: " + post.getDeliveryDate()+ "\n";
+//                        content += "Note : " + post.getNote() + "\n";
+//                        content += "Territory Id: " + post.getTerritoryId()+ "\n";
+//                        content += "SCId: " + post.getSCId()+ "\n";
+//                        content += "Order Status: " + post.getOrderStatus()+ "\n\n";
+//
+//
+//
+//                        OrderDetails.append(content);
+//                        // Holidayres.append(content);
+//                    }
 
-                    for (OrderStatus post : nlist) {
-                        String content = "";
-                        content += "Order No: " + post.getOrderNo() + "\n";
-                        content += "Customer Id: " + post.getCustomerId()+ "\n";
-                        content += "Order Date: " + post.getOrderDate()+ "\n";
-                        content += "Delivery Date: " + post.getDeliveryDate()+ "\n";
-                        content += "Note : " + post.getNote() + "\n";
-                        content += "Territory Id: " + post.getTerritoryId()+ "\n";
-                        content += "SCId: " + post.getSCId()+ "\n";
-                        content += "Order Status: " + post.getOrderStatus()+ "\n\n";
 
 
-
-                        OrderDetails.append(content);
-                        // Holidayres.append(content);
-                    }
-
-
-
+                    loaddatainlistview();
 
 
                 } else {
@@ -218,6 +239,15 @@ public class OrderStatusFragment extends Fragment {
 
                 }
 
+            }
+
+            public void loaddatainlistview() {
+//                ProductListRoomDB db = ProductListRoomDB.getDbInstance(requireContext());
+//                arrayList = db.productListDAO().getAllProduct();
+                OrderStatusAdapter adapter = new OrderStatusAdapter(nlist, requireContext());
+                OrderDetail.setLayoutManager(new LinearLayoutManager(requireContext()));
+                OrderDetail.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
