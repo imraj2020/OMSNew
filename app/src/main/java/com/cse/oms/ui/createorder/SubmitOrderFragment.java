@@ -106,6 +106,7 @@ public class SubmitOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSubmitOrderBinding.inflate(inflater);
+
         initRecyclerView();
         Productlist();
         SearchProduct();

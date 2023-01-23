@@ -1,7 +1,11 @@
 package com.cse.oms.View;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +35,15 @@ public class LoginActivity extends AppCompatActivity {
     EditText EtUserId, EtPassword;
     String userid, password;
     LoginDbHelper dbs;
+    private static final String PREFS_NAME = "preferences";
+    private static final String PREF_UNAME = "Username";
+    private static final String PREF_PASSWORD = "Password";
+
+    private final String DefaultUnameValue = "";
+    private String UnameValue;
+
+    private final String DefaultPasswordValue = "";
+    private String PasswordValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,13 +90,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (password.isEmpty()) {
                     EtPassword.setError("Password cannot be empty");
                 }
-
+                savePreferences();
                 login();
-//                if(userid.equals("imraj") && password.equals("123")){
-//                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-//                    startActivity(intent);
-//                }
             }
         });
 
@@ -198,6 +206,68 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        savePreferences();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadPreferences();
+    }
+
+    private void savePreferences() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+
+        // Edit and commit
+        UnameValue = String.valueOf(EtUserId.getText());
+        PasswordValue = String.valueOf(EtPassword.getText());
+        System.out.println("onPause save name: " + UnameValue);
+        System.out.println("onPause save password: " + PasswordValue);
+        editor.putString(PREF_UNAME, UnameValue);
+        editor.putString(PREF_PASSWORD, PasswordValue);
+        editor.commit();
+    }
+
+    private void loadPreferences() {
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE);
+
+        // Get value
+        UnameValue = settings.getString(PREF_UNAME, DefaultUnameValue);
+        PasswordValue = settings.getString(PREF_PASSWORD, DefaultPasswordValue);
+        EtUserId.setText(UnameValue);
+//        EtPassword.setText(PasswordValue);
+//        System.out.println("onResume load name: " + UnameValue);
+//        System.out.println("onResume load password: " + PasswordValue);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        LoginActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
 
     }
 }

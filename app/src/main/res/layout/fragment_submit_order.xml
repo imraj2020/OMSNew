@@ -12,7 +12,6 @@
         <LinearLayout
             android:id="@+id/llCustomerDetails"
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
@@ -39,7 +38,7 @@
                 android:drawableEnd="@drawable/ic_drop_down"
                 android:focusable="false"
                 android:padding="5dp"
-                android:text="Select"
+                android:text="Please Select Client Name "
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
             <!--       <Spinner
@@ -146,15 +145,15 @@
 
                         <TextView
                             android:id="@+id/PrevButton"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+
                             android:layout_height="40dp"
                             android:layout_margin="10dp"
                             android:background="@color/colorPrimary"
                             android:drawableLeft="@drawable/ic_arrow_back"
                             android:drawableTint="@android:color/black"
                             android:padding="4dp"
-                            android:text="Prev"
+
                             android:textAlignment="center"
                             android:textColor="@android:color/black" />
 
@@ -164,8 +163,11 @@
                             android:layout_height="match_parent"
                             android:layout_weight="2"
                             android:icon="@android:drawable/ic_menu_search"
+                            android:background="@drawable/button_background_blue"
                             android:orderInCategory="100"
                             android:title="Search"
+                            app:queryHint="Search Product Here !!!"
+                            android:layoutDirection="rtl"
                             app:actionViewClass="androidx.appcompat.widget.SearchView" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -208,7 +210,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="2dp" />
+                    android:layout_marginBottom="40dp" />
 
                 <LinearLayout
                     android:id="@+id/layoutAddProductsBillPreview"
