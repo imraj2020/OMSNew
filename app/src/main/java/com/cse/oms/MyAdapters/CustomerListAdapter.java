@@ -92,17 +92,6 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
 
     @Override
     public int getItemCount() {
-        int x = userModelList.size();
-        SharedPreferences prefs = context.getSharedPreferences("my_prefs", MODE_PRIVATE);
-        SharedPreferences.Editor edit = prefs.edit();
-        edit.putInt("size", x );
-        edit.commit();
-
-
-
-
-        //list.size
-      //  Toast.makeText(context,x+" Size",Toast.LENGTH_LONG).show();
         return userModelList.size();
     }
 

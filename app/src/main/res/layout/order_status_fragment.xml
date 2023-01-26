@@ -143,6 +143,71 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@drawable/button_background_blue"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingRight="5dp"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:textColor="@color/black"
+                    android:text="Order No"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:text="Customer Id"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:text="Order Date"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:text="Delivery Date"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:textDirection="rtl"
+                    android:text="Status"/>
+
+
+
+
+
+
+            </LinearLayout>
+
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -172,32 +237,33 @@
                 android:gravity="center|bottom"
                 android:orientation="vertical">
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:gravity="center|bottom"-->
-<!--                    android:orientation="horizontal">-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:text="Total Result : "/>-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center|bottom"
+                    android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:text="Total Result : "/>
 
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:id="@+id/totalresult"-->
-<!--                    android:text="OMS"-->
-<!--                    android:textColor="@color/black"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/totalresult"
+                    android:text="OMS"
+                    android:textColor="@color/black"/>
 
-<!--                </LinearLayout>-->
+                </LinearLayout>
 
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:id="@+id/goback"
                     android:text="Back"/>
             </LinearLayout>

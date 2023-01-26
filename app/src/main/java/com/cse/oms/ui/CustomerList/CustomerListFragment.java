@@ -56,13 +56,6 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
         MySearch = binding.searchviews;
         TCustomer = binding.totalcustomer;
 
-        SharedPreferences prefs = getActivity().getSharedPreferences("my_prefs", MODE_PRIVATE);
-
-        int size = prefs.getInt("size", 0);
-
-
-
-        TCustomer.setText(Integer.toString(size));
 
 
         MySearch.clearFocus();
@@ -131,6 +124,8 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
                 if (response.isSuccessful()) {
 
                     List<CustomerResponse> nlist = response.body();
+
+                    binding.totalcustomer.setText(Integer.toString(nlist.size()));
 
 
                     for (CustomerResponse post : nlist) {

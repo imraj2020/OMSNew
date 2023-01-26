@@ -156,7 +156,6 @@ public class OrderStatusFragment extends Fragment {
                 register();
 
 
-
             }
         });
 
@@ -208,6 +207,10 @@ public class OrderStatusFragment extends Fragment {
                     //public static List<NewOrderStatus> = nlist;
                     binding.orderstatussrch.setVisibility(View.GONE);
                     binding.orderstatusresult.setVisibility(View.VISIBLE);
+
+                    int count= nlist.size();
+
+                    binding.totalresult.setText(Integer.toString(count));
 //                    if(nlist.isEmpty()){
 //                        Toast.makeText(requireContext(), " No Data Found ! ", Toast.LENGTH_LONG).show();
 //                    }

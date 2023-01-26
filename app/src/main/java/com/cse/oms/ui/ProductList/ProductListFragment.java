@@ -63,13 +63,6 @@ public class ProductListFragment extends Fragment {
         MySearch = binding.productsearch;
         Tproduct = binding.totalproduct;
 
-        SharedPreferences prefs = getActivity().getSharedPreferences("my_prefes", MODE_PRIVATE);
-
-        int size = prefs.getInt("psize", 0);
-
-
-
-        Tproduct.setText(Integer.toString(size));
 
 
 
@@ -136,6 +129,8 @@ public class ProductListFragment extends Fragment {
                 if (response.isSuccessful()) {
 
                     List<ProductResponse> nlist = response.body();
+
+                    binding.totalproduct.setText(Integer.toString(nlist.size()));
 
 
                     for (ProductResponse post : nlist) {

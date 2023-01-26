@@ -14,6 +14,7 @@
         <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_background_blue"
             android:layoutDirection="rtl"
             android:id="@+id/productsearch"
             app:queryHint="Search Here"

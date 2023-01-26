@@ -80,13 +80,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public int getItemCount() {
-
-        int product = userModelList.size();
-        SharedPreferences prefes = context.getSharedPreferences("my_prefes", MODE_PRIVATE);
-        SharedPreferences.Editor edit = prefes.edit();
-        edit.putInt("psize", product);
-        edit.commit();
-
         return userModelList.size();
     }
 

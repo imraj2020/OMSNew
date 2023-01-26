@@ -61,25 +61,16 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
 
 
 
-        holder.OrderNo.setText("OrderNo: "+data.getOrderNo());
-        holder.CustomerId.setText("CustomerId: "+data.getCustomerId());
-        holder.OrderDate.setText("OrderDate: "+data.getOrderDate());
-        holder.DeliveryDate.setText("DeliveryDate: "+data.getDeliveryDate());
-        holder.Note.setText("Note: "+data.getNote());
-        holder.TerritoryId.setText("TerritoryId: "+Integer.toString(data.getTerritoryId()));
-        holder.SCId.setText("SCId: "+data.getSCId());
-        holder.OrderStatus.setText("OrderStatus: "+data.getOrderStatus()+"\n");
+        holder.OrderNo.setText(data.getOrderNo());
+        holder.CustomerId.setText(data.getCustomerId());
+        holder.OrderDate.setText(data.getOrderDate());
+        holder.DeliveryDate.setText(data.getDeliveryDate());
+        holder.OrderStatus.setText(data.getOrderStatus()+"\n");
 
     }
 
     @Override
     public int getItemCount() {
-
-        int tresult = list.size();
-        SharedPreferences prefes = context.getSharedPreferences("my_prefes", MODE_PRIVATE);
-        SharedPreferences.Editor edit = prefes.edit();
-        edit.putInt("totalR", tresult);
-        edit.commit();
         return list.size();
     }
 
@@ -95,9 +86,6 @@ public class OrderStatusAdapter extends RecyclerView.Adapter<OrderStatusAdapter.
             CustomerId = (TextView)itemView.findViewById(R.id.TvCustomerId);
             OrderDate = (TextView)itemView.findViewById(R.id.TvOrderDate);
             DeliveryDate = (TextView)itemView.findViewById(R.id.TvDeliveryDate);
-            Note = (TextView)itemView.findViewById(R.id.TvNote);
-            TerritoryId = (TextView)itemView.findViewById(R.id.TvTerritoryId);
-            SCId = (TextView)itemView.findViewById(R.id.TvSCId);
             OrderStatus = (TextView)itemView.findViewById(R.id.TvOrderStatus);
             MyCardView = itemView.findViewById(R.id.orderstatuscard);
 

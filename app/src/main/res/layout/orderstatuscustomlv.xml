@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/orderstatuscard"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="20dp"
+    app:cardCornerRadius="10dp"
     android:layout_margin="5dp"
     android:padding="5dp">
 
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:id="@+id/mylinear"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
 
 
@@ -21,56 +21,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="OrderNo:"
+            android:paddingRight="5dp"
+            android:text="Order No"
+            android:layout_weight="1"
             android:id="@+id/TvOrderNo"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingRight="5dp"
             android:textColor="@color/black"
-            android:text="CustomerId:"
+            android:text="CustomerId"
+            android:layout_weight="1"
             android:id="@+id/TvCustomerId"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Order Date"
+            android:paddingRight="5dp"
             android:textColor="@color/black"
-            android:text="OrderDate:"
             android:id="@+id/TvOrderDate"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Deliv Date"
+            android:paddingRight="5dp"
+            android:layout_weight="1"
             android:textColor="@color/black"
-            android:text="DeliveryDate:"
             android:id="@+id/TvDeliveryDate"/>
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Status"
+            android:layout_weight="1"
             android:textColor="@color/black"
-            android:text="Note:"
-            android:id="@+id/TvNote"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="TerritoryId:"
-            android:id="@+id/TvTerritoryId"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="SCId:"
-            android:id="@+id/TvSCId"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="OrderStatus:"
+            android:textDirection="rtl"
             android:id="@+id/TvOrderStatus"/>
 
 
