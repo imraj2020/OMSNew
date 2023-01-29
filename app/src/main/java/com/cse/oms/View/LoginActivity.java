@@ -169,6 +169,7 @@ public class LoginActivity extends AppCompatActivity {
                     i.putExtra("TerritoryId",TerritoryId);
                     i.putExtra("SalesLineId",SalesLineId);
                     startActivity(i);
+                    LoginActivity.this.finish();
 
 
                 } else {
@@ -251,7 +252,6 @@ public class LoginActivity extends AppCompatActivity {
 //        System.out.println("onResume load password: " + PasswordValue);
     }
 
-    @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to exit?")
