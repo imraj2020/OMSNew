@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,12 +30,14 @@ import com.cse.oms.CreateOrderRoomDatabase.models.DraftProductModel;
 import com.cse.oms.LoginResRoomDb.LoginResInfo;
 import com.cse.oms.LoginResRoomDb.LoginResRoomDB;
 import com.cse.oms.Network.ApiClient;
+import com.cse.oms.R;
 import com.cse.oms.databinding.DraftsFragmentBinding;
 import com.cse.oms.ui.createorder.Adapter.AddedProductAdapter;
 import com.cse.oms.ui.createorder.Adapter.DraftAdapter;
 import com.cse.oms.ui.createorder.Adapter.POProductAdapter;
 import com.cse.oms.ui.createorder.Adapter.SaleProductAdapter;
 import com.cse.oms.ui.createorder.MessageEvent;
+import com.cse.oms.ui.createorder.SubmitOrderFragment;
 import com.cse.oms.ui.createorder.UiModificationEvent;
 import com.cse.oms.ui.createorder.Utils.Constants;
 import com.cse.oms.ui.createorder.Utils.Utilities;
@@ -102,6 +105,31 @@ public class DraftsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = DraftsFragmentBinding.inflate(inflater);
 
+
+
+        binding.btnback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                binding.llDraftList.setVisibility(View.VISIBLE);
+                binding.llProduct.setVisibility(View.GONE);
+                binding.llReceiptVIew.setVisibility(View.GONE);
+            }
+        });
+
+        binding.btnbacks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Move one Fragment to another
+                FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                ft.replace(R.id.nav_host_fragment_content_main, new DraftsFragment(), null);
+                ft.addToBackStack(DraftsFragment.class.getName()); // you can use a string here, using the class name is just convenient
+                ft.commit();
+            }
+        });
+
+
         initRecyclerView();
         initReceiptRecyclerView();
         showDraftOrders();
@@ -155,7 +183,14 @@ public class DraftsFragment extends Fragment {
         binding.SubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitBtnOnClick();
+
+                double totals = Double.parseDouble(binding.etNetPayments.getText().toString());
+
+                if (totals == 0) {
+                    Toast.makeText(getContext(), "Please Add Some Product First", Toast.LENGTH_SHORT).show();
+                } else {
+                    submitBtnOnClick();
+                }
             }
         });
     }
@@ -262,14 +297,16 @@ public class DraftsFragment extends Fragment {
         for (int i = 0; i < addedProducts.size(); i++) {
             total += addedProducts.get(i).getAmount();
         }
-        binding.etNetPayment.setText(String.format("%.2f", total));
+        binding.etNetPayments.setText(String.format("%.2f", total));
         addedProductAdapter.notifyDataSetChanged();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(MessageEvent event) {
-        if (event.isUpdate())
+        if (event.isUpdate()){
             Toast.makeText(context, "No Item in Drafts", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
@@ -326,7 +363,7 @@ public class DraftsFragment extends Fragment {
                 EntryTime = draftOrderModel.getEntryTime();
                 Note = draftOrderModel.getNote();
                 binding.tvCustomer.setText(draftOrderModel.getCustomerName());
-                binding.etNetPayment.setText(String.valueOf(draftOrderModel.getAmount()));
+                binding.etNetPayments.setText(String.valueOf(draftOrderModel.getAmount()));
                 List<DraftProductModel> draftProductModels = orderDatabase.daoAccess().getProductsByOrder(draftOrderModel.getId());
                 addedProducts.clear();
                 for (DraftProductModel draftProductModel : draftProductModels) {

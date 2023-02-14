@@ -141,7 +141,7 @@ public class OrderStatusFragment extends Fragment {
                                                   int monthOfYear, int dayOfMonth) {
                                 // set day of month , month and year value in the edit text
                                 DeliveryDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-                                ;
+
 
                             }
                         }, mYear, mMonth, mDay);
@@ -154,8 +154,6 @@ public class OrderStatusFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 register();
-
-
             }
         });
 

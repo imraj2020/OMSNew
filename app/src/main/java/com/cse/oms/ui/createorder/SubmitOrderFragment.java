@@ -19,11 +19,13 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -89,6 +91,9 @@ public class SubmitOrderFragment extends Fragment {
     POProductAdapter productAdapter;
     private OrderDatabase orderDatabase;
     private FragmentSubmitOrderBinding binding;
+    TextView CustomerLists;
+    EditText DeliveryDates;
+
 
     @Override
     public void onAttach(Context context) {
@@ -106,6 +111,10 @@ public class SubmitOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSubmitOrderBinding.inflate(inflater);
+
+        CustomerLists = binding.tvCustomerList;
+        DeliveryDates = binding.DeliveryDate;
+
 
         initRecyclerView();
         Productlist();
@@ -138,7 +147,7 @@ public class SubmitOrderFragment extends Fragment {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
         binding.OrderDate.setText(formatter.format(calendar.getTime()));
-        binding.DeliveryDate.setText(formatter.format(calendar.getTime()));
+        // binding.DeliveryDate.setText(formatter.format(calendar.getTime()));
         entryTime = formatter.format(calendar.getTime());
     }
 
@@ -384,13 +393,27 @@ public class SubmitOrderFragment extends Fragment {
         binding.btnDraft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveDraftSale();
+
+                double totals = Double.parseDouble(binding.etNetPayment.getText().toString());
+
+                if (totals == 0) {
+                    Toast.makeText(getContext(), "Please Add Some Product First", Toast.LENGTH_SHORT).show();
+                } else {
+                    saveDraftSale();
+                }
             }
         });
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitBtnOnClick();
+
+                double totalss = Double.parseDouble(binding.etNetPayment.getText().toString());
+
+                if (totalss == 0) {
+                    Toast.makeText(getContext(), "Please Add Some Product First", Toast.LENGTH_SHORT).show();
+                } else {
+                    submitBtnOnClick();
+                }
             }
         });
 
@@ -441,10 +464,25 @@ public class SubmitOrderFragment extends Fragment {
         });
 
         binding.NextButton.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
-                binding.llCustomerDetails.setVisibility(View.GONE);
-                binding.llProduct.setVisibility(View.VISIBLE);
+
+                if (CustomerLists.getText().toString().isEmpty()) {
+                    CustomerLists.setError("Please Select Cilent Name");
+                    Toast.makeText(requireContext(), "Please Select Cilent Name", Toast.LENGTH_LONG).show();
+                }
+                if (DeliveryDates.getText().toString().isEmpty()) {
+                    DeliveryDates.setError("Please Select Delivary Date");
+                    Toast.makeText(requireContext(), "Please Select Delivary Date", Toast.LENGTH_LONG).show();
+                } else {
+
+                    binding.llCustomerDetails.setVisibility(View.GONE);
+                    binding.llProduct.setVisibility(View.VISIBLE);
+                }
+
+
             }
         });
 
@@ -469,6 +507,18 @@ public class SubmitOrderFragment extends Fragment {
             public void onClick(View v) {
                 binding.llCustomerDetails.setVisibility(View.VISIBLE);
                 binding.llProduct.setVisibility(View.GONE);
+            }
+        });
+
+
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Move one Fragment to another
+                FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                ft.replace(R.id.nav_host_fragment_content_main, new SubmitOrderFragment(), null);
+                ft.addToBackStack(SubmitOrderFragment.class.getName()); // you can use a string here, using the class name is just convenient
+                ft.commit();
             }
         });
 
