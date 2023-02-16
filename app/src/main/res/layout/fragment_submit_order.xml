@@ -362,12 +362,20 @@
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/llReceiptVIew"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:background="#14000000"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/OrderNo"
@@ -411,6 +419,8 @@
                 android:id="@+id/CustomerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_margin="5dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
@@ -418,8 +428,15 @@
                 android:id="@+id/CustomerAddrss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_margin="5dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProductbills"
@@ -429,6 +446,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="2dp" />
+
+            </ScrollView>
 
             <TextView
                 android:layout_width="match_parent"
@@ -444,6 +463,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:paddingRight="10dp"
                 android:padding="10dp"
                 android:gravity="end"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
@@ -459,6 +479,8 @@
 
 
         </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
     <include layout="@layout/progressbar" />

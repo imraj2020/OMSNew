@@ -147,7 +147,7 @@ public class SubmitOrderFragment extends Fragment {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
         binding.OrderDate.setText(formatter.format(calendar.getTime()));
-        // binding.DeliveryDate.setText(formatter.format(calendar.getTime()));
+        binding.DeliveryDate.setText(formatter.format(calendar.getTime()));
         entryTime = formatter.format(calendar.getTime());
     }
 
@@ -476,8 +476,8 @@ public class SubmitOrderFragment extends Fragment {
                 if (DeliveryDates.getText().toString().isEmpty()) {
                     DeliveryDates.setError("Please Select Delivary Date");
                     Toast.makeText(requireContext(), "Please Select Delivary Date", Toast.LENGTH_LONG).show();
-                } else {
-
+                }
+                if(!CustomerLists.getText().toString().isEmpty() && !DeliveryDates.getText().toString().isEmpty() ) {
                     binding.llCustomerDetails.setVisibility(View.GONE);
                     binding.llProduct.setVisibility(View.VISIBLE);
                 }
@@ -639,7 +639,7 @@ public class SubmitOrderFragment extends Fragment {
                     binding.DelivaryDate.setText(response.body().getOrderBaicInfo().getDeliveryDate());
                     binding.CustomerName.setText(response.body().getOrderBaicInfo().getCustomerName());
                     binding.CustomerAddrss.setText(response.body().getOrderBaicInfo().getCustomerAddress());
-                    binding.TotalAmount.setText(String.format("%.2f", response.body().getOrderBaicInfo().getTotalOrderPrice()));
+                    binding.TotalAmount.setText("Total = "+String.format("%.2f", response.body().getOrderBaicInfo().getTotalOrderPrice()));
                     productList.clear();
                     productList.addAll(response.body().getOrderItemList());
                     productAdapter.notifyDataSetChanged();

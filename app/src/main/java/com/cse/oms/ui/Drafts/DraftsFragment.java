@@ -167,6 +167,7 @@ public class DraftsFragment extends Fragment {
         binding.tvProductList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.actionSearch.setVisibility(View.VISIBLE);
                 binding.layoutAddProductsBillPreview.setVisibility(View.GONE);
                 binding.rvProducts.setVisibility(View.VISIBLE);
                 binding.llButton.setVisibility(View.GONE);
@@ -175,6 +176,7 @@ public class DraftsFragment extends Fragment {
         binding.tvOrderDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.actionSearch.setVisibility(View.GONE);
                 binding.rvProducts.setVisibility(View.GONE);
                 binding.layoutAddProductsBillPreview.setVisibility(View.VISIBLE);
                 binding.llButton.setVisibility(View.VISIBLE);
@@ -484,7 +486,7 @@ public class DraftsFragment extends Fragment {
                     binding.DelivaryDate.setText(response.body().getOrderBaicInfo().getDeliveryDate());
                     binding.CustomerName.setText(response.body().getOrderBaicInfo().getCustomerName());
                     binding.CustomerAddrss.setText(response.body().getOrderBaicInfo().getCustomerAddress());
-                    binding.TotalAmount.setText(response.body().getOrderBaicInfo().getTotalOrderPrice().toString());
+                    binding.TotalAmount.setText("Total = "+response.body().getOrderBaicInfo().getTotalOrderPrice().toString());
                     productList.clear();
                     productList.addAll(response.body().getOrderItemList());
                     productAdapter.notifyDataSetChanged();
