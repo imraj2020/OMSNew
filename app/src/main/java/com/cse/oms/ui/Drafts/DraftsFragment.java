@@ -554,4 +554,10 @@ public class DraftsFragment extends Fragment {
         if (orderDatabase != null)
             orderDatabase.close();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        orderDatabase.close();
+    }
 }

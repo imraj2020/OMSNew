@@ -167,7 +167,7 @@
                             android:background="@drawable/button_background_blue"
                             android:orderInCategory="100"
                             android:title="Search"
-                            app:queryHint="Search Product Here !!!"
+                            app:queryHint="Search Product Here"
                             android:layoutDirection="rtl"
                             app:actionViewClass="androidx.appcompat.widget.SearchView" />
                     </LinearLayout>

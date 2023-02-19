@@ -64,4 +64,12 @@ public interface UserService {
 
     );
 
+
+    @POST("api/HomeApi/ChangePassword")
+    Call<ChengePasswordResponse>chengePassword(@Query("networkId") String networkId,
+                                              @Query("OldPassword") String OldPassword,
+                                              @Query("NewPassword") String NewPassword
+
+    );
+
 }

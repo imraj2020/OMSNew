@@ -39,6 +39,10 @@
             android:title="@string/menu_datasync" />
 
         <item
+            android:id="@+id/nav_changepassword"
+            android:title="@string/menu_changepassword" />
+
+        <item
             android:id="@+id/nav_quit"
             android:title="@string/menu_quit" />
     </group>

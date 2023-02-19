@@ -11,11 +11,12 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
+
     <fragment
         android:id="@+id/create_order"
         android:name="com.cse.oms.ui.createorder.SubmitOrderFragment"
         android:label="@string/menu_createorder"
-        tools:layout="@layout/fragment_create_order" />
+        tools:layout="@layout/fragment_submit_order" />
 
 
     <fragment
@@ -71,6 +72,12 @@
         android:name="com.cse.oms.ui.DataSync.DataSyncFragment"
         android:label="@string/menu_datasync"
         tools:layout="@layout/data_sync_fragment" />
+
+    <fragment
+        android:id="@+id/nav_changepassword"
+        android:name="com.cse.oms.ui.ChangePassword.ChangePasswordFragment"
+        android:label="@string/menu_changepassword"
+        tools:layout="@layout/fragment_change_password" />
 
 
 </navigation>
