@@ -72,4 +72,15 @@ public interface UserService {
 
     );
 
+
+
+
+    @POST("api/NoOrderApi/CreateNoOrder")
+    Call<NoOrderApiResponse> createNoOrder(
+            @Body NoOrderApiResponse myrequest
+    );
+
+
+
+
 }

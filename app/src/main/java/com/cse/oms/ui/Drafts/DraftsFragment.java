@@ -106,7 +106,6 @@ public class DraftsFragment extends Fragment {
         binding = DraftsFragmentBinding.inflate(inflater);
 
 
-
         binding.btnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,7 +197,7 @@ public class DraftsFragment extends Fragment {
     }
 
     private void showDraftOrders() {
-        orderDatabase = Room.databaseBuilder(getContext(),
+        orderDatabase = Room.databaseBuilder(requireContext(),
                 OrderDatabase.class, Constants.DATABASE_NAME).build();
         new Thread(new Runnable() {
             @Override
@@ -209,7 +208,7 @@ public class DraftsFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(getContext(), "No Drafts saved", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireContext(), "No Drafts saved", Toast.LENGTH_SHORT).show();
                                 // dismiss();
                             }
                         });
@@ -218,7 +217,13 @@ public class DraftsFragment extends Fragment {
                     }
                 } else {
                     draftOrderModels.addAll(allOrders);
-                    draftAdapter.notifyDataSetChanged();
+
+                    try {
+                        draftAdapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        // Toast.makeText(requireContext(),"Something Wrong",Toast.LENGTH_LONG) .show();
+                    }
+
                 }
             }
         }).start();
@@ -244,7 +249,12 @@ public class DraftsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<OrderProductsModel>> call, Throwable t) {
-                Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
+                try{
+                    Toast.makeText(getContext(), "Retrive Failed", Toast.LENGTH_SHORT).show();
+                }catch (Exception e){
+
+                }
+
             }
         });
     }
@@ -286,7 +296,7 @@ public class DraftsFragment extends Fragment {
         if (filteredlist.isEmpty()) {
             // if no item is added in filtered list we are
             // displaying a toast message as no data found.
-            Toast.makeText(getContext(), "No Data Found..", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(getContext(), "No Data Found..", Toast.LENGTH_SHORT).show();
         } else {
             // at last we are passing that filtered
             // list to our adapter class.
@@ -300,13 +310,19 @@ public class DraftsFragment extends Fragment {
             total += addedProducts.get(i).getAmount();
         }
         binding.etNetPayments.setText(String.format("%.2f", total));
-        addedProductAdapter.notifyDataSetChanged();
+
+        try {
+            addedProductAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+
+        }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(MessageEvent event) {
-        if (event.isUpdate()){
-            Toast.makeText(context, "No Item in Drafts", Toast.LENGTH_SHORT).show();
+        if (event.isUpdate()) {
+            // Toast.makeText(context, "No Item in Drafts", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -318,7 +334,7 @@ public class DraftsFragment extends Fragment {
         draftAdapter.notifyDataSetChanged();
 
         if (draftOrderModels.isEmpty())
-            Toast.makeText(context, "No Item in Drafts", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "No Item in Drafts", Toast.LENGTH_SHORT).show();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -486,7 +502,7 @@ public class DraftsFragment extends Fragment {
                     binding.DelivaryDate.setText(response.body().getOrderBaicInfo().getDeliveryDate());
                     binding.CustomerName.setText(response.body().getOrderBaicInfo().getCustomerName());
                     binding.CustomerAddrss.setText(response.body().getOrderBaicInfo().getCustomerAddress());
-                    binding.TotalAmount.setText("Total = "+response.body().getOrderBaicInfo().getTotalOrderPrice().toString());
+                    binding.TotalAmount.setText("Total = " + response.body().getOrderBaicInfo().getTotalOrderPrice().toString());
                     productList.clear();
                     productList.addAll(response.body().getOrderItemList());
                     productAdapter.notifyDataSetChanged();

@@ -4,22 +4,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.NoOrder.NoOrderFragment">
+    tools:context="com.cse.oms.ui.NoOrder.NoOrderFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Customer Name: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+        <TextView
+            android:id="@+id/tvCustomerLists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/text_border"
+            android:drawableEnd="@drawable/ic_drop_down"
+            android:focusable="false"
+            android:padding="5dp"
+            android:hint="Please Select Customer Name "
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+        <!--       <Spinner
+                   android:id="@+id/spinner"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="5dp"
+                   android:background="@drawable/text_border"
+                   android:dropDownSelector="@color/green"
+                   android:padding="5dp"
+                   android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+   -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Order Date: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+        <EditText
+            android:id="@+id/ETOrderDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/text_border"
+            android:focusable="false"
+            android:padding="5dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Order No: "
+            android:text="Entry Date: "
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <EditText
-            android:id="@+id/etOorderNo"
+            android:id="@+id/ETEntryDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/text_border"
+            android:focusable="false"
+            android:padding="5dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Note: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+        <EditText
+            android:id="@+id/ETNote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -28,28 +92,16 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-            android:id="@+id/ViewButton"
+            android:id="@+id/BtnNext"
             style="@style/loginButton"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/loginViewsMargin"
-            android:text="View"
+            android:text="Next"
             app:initialCornerAngle="27dp"
             app:spinning_bar_color="#FFF"
             app:spinning_bar_padding="6dp"
             app:spinning_bar_width="4dp" />
 
-        <ScrollView
-            android:id="@+id/svReceiptView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-        </ScrollView>
     </LinearLayout>
 
 </FrameLayout>
