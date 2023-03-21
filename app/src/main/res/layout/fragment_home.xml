@@ -53,7 +53,6 @@
         android:layout_below="@+id/text_homes"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:gravity="center"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -73,12 +72,6 @@
             android:text="TextView"
             android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/tv_EmpNetworkId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_EmpCode"
@@ -88,10 +81,25 @@
             android:text="TextView"
             android:textColor="@color/black" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_EmpNetworkId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textColor="@color/black" />
+
         <TextView
             android:id="@+id/tv_Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -99,8 +107,11 @@
             android:id="@+id/tv_MobileNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="TextView"
             android:textColor="@color/black" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_DepartmentName"

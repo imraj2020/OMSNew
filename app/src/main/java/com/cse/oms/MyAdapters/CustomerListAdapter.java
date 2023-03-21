@@ -80,10 +80,11 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
 
 
 
-        setBoldText(holder.Name, "Name: ", data.getName());
+        setBoldText(holder.Name, "Name: ", data.getName()+" ");
         holder.CustomerId.setText("(" + data.getCustomerid()+")");
-        setBoldText(holder.DepotName, "Depot: ", data.getDepotname()+" ");
         setBoldText(holder.Address, "Address: ", data.getAddress());
+        setBoldText(holder.DepotName, "Depot: ", data.getDepotname()+" ");
+
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

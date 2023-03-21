@@ -1,7 +1,12 @@
 package com.cse.oms.ui.home;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,25 +140,33 @@ public class HomeFragment extends Fragment {
             int territoryid = list.get(0).getTerritoryId();
             String territoryname = list.get(0).getTerritoryName();
 
+
+            setBoldText(EmpNetworkId, "Network Id: ", empnetworkid);
+            setBoldText(Email, "Email: ", email);
+            setBoldText(MobileNo, "Mobile No: ", mobileon);
+
+
+
+
             Welcomes.setText("Welcome  " + fullname);
-            EmpId.setText("EmpId: " + empid);
-            FullName.setText("FullName: " + fullname);
-            EmpNetworkId.setText("NetworkId: "+empnetworkid);
-            EmpCode.setText("EmpCode: "+empcode);
-            Email.setText("Email: "+email);
-            MobileNo.setText("MobileNo: "+mobileon);
-            DepartmentName.setText("DepartmentName: "+departmentname);
-            DesignationName.setText("DesignationName: " + designationname);
-            BUId.setText("BUId: " + buid);
-            BUName.setText("BUName: " + buname);
-            SalesLineId.setText("SalesLineId: " + saleslineid);
-            SalesLineName.setText("SalesLineName: " + saleslinename);
-            RegionId.setText("RegionId: " + regionid);
-            RegionName.setText("RegionName: " + regionname);
-            TeamId.setText("TeamId: " + teamid);
-            TeamName.setText("TeamName: " + teamname);
-            TerritoryId.setText("TerritoryId: " + territoryid);
-            TerritoryName.setText("TerritoryName: " + territoryname);
+//            EmpId.setText("EmpId: " + empid);
+//            FullName.setText("FullName: " + fullname);
+//            EmpNetworkId.setText("Network Id: "+empnetworkid);
+//            EmpCode.setText("EmpCode: "+empcode);
+//            Email.setText("Email: "+email);
+//            MobileNo.setText("Mobile No: "+mobileon);
+//            DepartmentName.setText("DepartmentName: "+departmentname);
+//            DesignationName.setText("DesignationName: " + designationname);
+//            BUId.setText("BUId: " + buid);
+//            BUName.setText("BUName: " + buname);
+//            SalesLineId.setText("SalesLineId: " + saleslineid);
+//            SalesLineName.setText("SalesLineName: " + saleslinename);
+//            RegionId.setText("RegionId: " + regionid);
+//            RegionName.setText("RegionName: " + regionname);
+//            TeamId.setText("TeamId: " + teamid);
+//            TeamName.setText("TeamName: " + teamname);
+//            TerritoryId.setText("TerritoryId: " + territoryid);
+//            TerritoryName.setText("TerritoryName: " + territoryname);
 
         }
 
@@ -169,6 +182,15 @@ public class HomeFragment extends Fragment {
             }
         });
         return binding.getRoot();
+    }
+
+    private void setBoldText(TextView textView, String boldText, String regularText) {
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        SpannableString boldString = new SpannableString(boldText);
+        boldString.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.append(boldString);
+        builder.append(regularText);
+        textView.setText(builder);
     }
 
     @Override

@@ -75,11 +75,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         }
 
 
-        setBoldText(holder.Name, "Name: ", data.getName());
+        setBoldText(holder.Name, "Name: ", data.getName()+" ");
         holder.ProductCode.setText("(" + data.getProductcode()+")");
-        setBoldText(holder.ProductCategory, "ProductCategory: ", data.getProductcategory()+" ");
-        setBoldText(holder.TradePrice, "TradePrice: ", Float.toString(data.getTradeprice())+" ");
-        setBoldText(holder.PackSize, "PackSize: ", Float.toString(data.getPacksize()));
+        setBoldText(holder.ProductCategory, "Category: ", data.getProductcategory()+" ");
+        setBoldText(holder.TradePrice, "Trade Price: ", Float.toString(data.getTradeprice())+" ");
+        setBoldText(holder.PackSize, "Pack Size: ", Float.toString(data.getPacksize()));
 
         //changes
 //        holder.Name.setText("Name: "+data.getName());
