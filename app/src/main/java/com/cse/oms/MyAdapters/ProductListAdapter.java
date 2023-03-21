@@ -5,6 +5,11 @@ import static android.content.Context.MODE_PRIVATE;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +48,15 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         notifyDataSetChanged();
     }
 
+    private void setBoldText(TextView textView, String boldText, String regularText) {
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        SpannableString boldString = new SpannableString(boldText);
+        boldString.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.append(boldString);
+        builder.append(regularText);
+        textView.setText(builder);
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,12 +75,18 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         }
 
 
+        setBoldText(holder.Name, "Name: ", data.getName());
+        holder.ProductCode.setText("(" + data.getProductcode()+")");
+        setBoldText(holder.ProductCategory, "ProductCategory: ", data.getProductcategory()+" ");
+        setBoldText(holder.TradePrice, "TradePrice: ", Float.toString(data.getTradeprice())+" ");
+        setBoldText(holder.PackSize, "PackSize: ", Float.toString(data.getPacksize()));
+
         //changes
-        holder.Name.setText("Name: "+data.getName());
-        holder.ProductCode.setText("ProductCode: "+data.getProductcode());
-        holder.ProductCategory.setText("ProductCategory: "+data.getProductcategory());
-        holder.TradePrice.setText("TradePrice: "+Float.toString(data.getTradeprice()));
-        holder.PackSize.setText("PackSize: "+Float.toString(data.getPacksize()));
+//        holder.Name.setText("Name: "+data.getName());
+//        holder.ProductCode.setText("ProductCode: "+data.getProductcode());
+//        holder.ProductCategory.setText("ProductCategory: "+data.getProductcategory());
+//        holder.TradePrice.setText("TradePrice: "+Float.toString(data.getTradeprice()));
+//        holder.PackSize.setText("PackSize: "+Float.toString(data.getPacksize()));
 
 
 

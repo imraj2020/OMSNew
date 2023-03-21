@@ -138,7 +138,7 @@ public class HomeFragment extends Fragment {
             Welcomes.setText("Welcome  " + fullname);
             EmpId.setText("EmpId: " + empid);
             FullName.setText("FullName: " + fullname);
-            EmpNetworkId.setText("EmpNetworkId: "+empnetworkid);
+            EmpNetworkId.setText("NetworkId: "+empnetworkid);
             EmpCode.setText("EmpCode: "+empcode);
             Email.setText("Email: "+email);
             MobileNo.setText("MobileNo: "+mobileon);

@@ -7,6 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,14 +78,13 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
         }
 
 
-       // holder.TerritoryId.setText("TerritoryId: " + Integer.toString(data.getTerritoryid()));
-       // holder.TerritoryName.setText("TerritoryName: " + data.getTerritoryname());
-       // holder.SCId.setText("SCId: " + data.getScid());
 
-        holder.Name.setText("Name: " + data.getName());
-        holder.CustomerId.setText("CustomerId: " + data.getCustomerid());
-        holder.DepotName.setText("DepotName: " + data.getDepotname());
-        holder.Address.setText("Address: " + data.getAddress() + "\n");
+
+        setBoldText(holder.Name, "Name: ", data.getName());
+        holder.CustomerId.setText("(" + data.getCustomerid()+")");
+        setBoldText(holder.DepotName, "Depot: ", data.getDepotname()+" ");
+        setBoldText(holder.Address, "Address: ", data.getAddress());
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +97,15 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
     @Override
     public int getItemCount() {
         return userModelList.size();
+    }
+
+    private void setBoldText(TextView textView, String boldText, String regularText) {
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+        SpannableString boldString = new SpannableString(boldText);
+        boldString.setSpan(new StyleSpan(Typeface.BOLD), 0, boldText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.append(boldString);
+        builder.append(regularText);
+        textView.setText(builder);
     }
 
     @Override

@@ -47,6 +47,15 @@ class NoOrderFragment : Fragment() {
 
         binding = NoOrderFragmentBinding.inflate(inflater);
 
+        val intent = requireActivity().intent
+        val empId = intent?.getIntExtra("EmpId", 0) ?: 0
+        val territoryId = intent?.getIntExtra("TerritoryId", 0) ?: 0 // 0 is the default value if "TerritoryId" is not found
+        val salesLineId = intent?.getIntExtra("SalesLineId", 0)?.toString()
+
+
+
+      //  Toast.makeText(context, "empId :"+empId+" territoryId: "+territoryId+" salesLineId: "+salesLineId, Toast.LENGTH_SHORT).show()
+
         OrderDate = binding.ETOrderDate
         EntryDate = binding.ETEntryDate
         Note = binding.ETNote
@@ -226,9 +235,9 @@ class NoOrderFragment : Fragment() {
 
 
         val intent = requireActivity().intent
-        val empId = intent.getIntExtra("EmpId", -1) // -1 is the default value if "EmpId" is not found
-        val territoryId = intent.getIntExtra("TerritoryId", -1) // -1 is the default value if "TerritoryId" is not found
-        val salesLineId = intent.getIntExtra("SalesLineId", -1).toString() // -1 is the default value if "SalesLineId" is not found
+        val empId = intent?.getIntExtra("EmpId", 0) ?: 0
+        val territoryId = intent?.getIntExtra("TerritoryId", 0) ?: 0 // 0 is the default value if "TerritoryId" is not found
+        val salesLineId = intent?.getIntExtra("SalesLineId", 0)?.toString() // 0 is the default value if "SalesLineId" is not found
 
 
 

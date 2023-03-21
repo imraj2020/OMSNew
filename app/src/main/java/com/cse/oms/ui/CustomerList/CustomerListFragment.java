@@ -85,7 +85,7 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
 
             private void selectedUser(CustomerListInfo customerListInfo) {
                 String Customerid= customerListInfo.getCustomerid();
-                Toast.makeText(requireContext(),customerListInfo.getCustomerid()+" Selected",Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(),"Customer Id: "+customerListInfo.getCustomerid()+" Selected",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -165,6 +165,6 @@ public class CustomerListFragment extends Fragment implements CustomerListAdapte
     @Override
     public void selectedUser(CustomerListInfo customerListInfo) {
 
-        Toast.makeText(requireContext(),customerListInfo.getCustomerid()+" Selected",Toast.LENGTH_LONG).show();
+        Toast.makeText(requireContext(),"Customer Id: "+customerListInfo.getCustomerid()+" Selected",Toast.LENGTH_LONG).show();
     }
 }

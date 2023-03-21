@@ -16,19 +16,20 @@
         android:padding="5dp">
 
 
-
-
-        <TextView
-            android:id="@+id/tvs_Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:textColor="@color/black" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvs_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Name"
+            android:textColor="@color/black" />
+
+
 
         <TextView
             android:id="@+id/tvs_CustomerId"
@@ -37,21 +38,27 @@
             android:layout_height="wrap_content"
             android:text="CustomerId"
             android:textColor="@color/black" />
+        </LinearLayout>
+
+
+
 
         <TextView
             android:id="@+id/tvs_DepotName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="DepotName"
             android:textColor="@color/black" />
 
-        </LinearLayout>
+
         <TextView
             android:id="@+id/tvs_Address"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Address"
             android:textColor="@color/black" />
+
+
 
 
     </LinearLayout>

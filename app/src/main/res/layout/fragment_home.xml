@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:id="@+id/omsnew"
             android:background="#fff"
-            android:src="@drawable/oms" />
+            android:src="@drawable/oms2" />
 
 
     </LinearLayout>
@@ -53,8 +53,6 @@
         android:layout_below="@+id/text_homes"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/spinner_border_top"
-        android:backgroundTint="#1E88E5"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dp">
@@ -64,12 +62,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
+            android:visibility="gone"
             android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_FullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -84,6 +84,7 @@
             android:id="@+id/tv_EmpCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -105,6 +106,7 @@
             android:id="@+id/tv_DepartmentName"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -112,6 +114,7 @@
             android:id="@+id/tv_DesignationName"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -119,6 +122,7 @@
             android:id="@+id/tv_BUId"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -126,6 +130,7 @@
             android:id="@+id/tv_BUName"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -133,6 +138,7 @@
             android:id="@+id/tv_SalesLineId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -140,6 +146,7 @@
             android:id="@+id/tv_SalesLineName"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -147,6 +154,7 @@
             android:id="@+id/tv_RegionId"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -154,6 +162,7 @@
             android:id="@+id/tv_RegionName"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -161,6 +170,7 @@
             android:id="@+id/tv_TeamId"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -168,6 +178,7 @@
             android:id="@+id/tv_TeamName"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -175,6 +186,7 @@
             android:id="@+id/tv_TerritoryId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
@@ -182,6 +194,7 @@
             android:id="@+id/tv_TerritoryName"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:text="TextView"
             android:textColor="@color/black" />
 
